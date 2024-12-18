@@ -53,8 +53,8 @@ export default class PolygonRanging {
 
     /**
      * 开始边线测距
-     * @param polygon 
-     * @returns 
+     * @param polygon
+     * @returns
      */
     public open(polygon: AMap.Polygon) {
         this.start(polygon || this.polygon);
@@ -62,8 +62,8 @@ export default class PolygonRanging {
 
     /**
      * 开始边线测距
-     * @param polygon 
-     * @returns 
+     * @param polygon
+     * @returns
      */
     public start(polygon: AMap.Polygon) {
         if (!polygon) return;
@@ -71,9 +71,10 @@ export default class PolygonRanging {
         this.polygon = polygon;
         this.lines!.createLinesByPaths(this.polygon.getPath() as Common.IPath);
         // 鼠标移动，判断是否命中了计算 PolygonEditor 的计算处理
-        const hasEvent = this.map.hasEvents('mousemove', this.onPolygonRanging);
+        const hasEvent = this.map.hasEvents('mousemove', this.onPolygonRanging) || this.map.hasEvents('touchmove', this.onPolygonRanging);
         if (!hasEvent) {
             this.map.on('mousemove', this.onPolygonRanging);
+            this.map.on('touchmove', this.onPolygonRanging);
         }
 
         this.registryPolygonEvents();

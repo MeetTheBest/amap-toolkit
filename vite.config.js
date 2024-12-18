@@ -13,6 +13,7 @@ export default defineConfig(({ command }) => {
             })
         ],
         server: {
+            host: '127.0.0.1',
             open: true
         },
         ...(
@@ -29,8 +30,8 @@ export default defineConfig(({ command }) => {
             minify: true,
             lib: {
                 entry: './src/main.ts',
-                name: 'gaode-tools',
-                fileName: (format) => `gaode-tools.${format}.js`
+                name: 'amap-toolkit',
+                fileName: (format) => `amap-toolkit.${format}.js`
             }
         }
     }

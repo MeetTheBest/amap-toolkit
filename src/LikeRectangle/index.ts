@@ -132,6 +132,11 @@ class LikeRectangle extends Event implements ILikeRectangle {
 
     create(): AMap.Polygon & IEnhanceProperty {
         const path = this.opts?.path || [this.leftTop, this.rightTop, this.rightBottom, this.leftBottom];
+
+        if (path.length !== 4) {
+            throw new Error('invalid path');
+        }
+
         this.likeRectangle = new AMap.Polygon() as AMap.Polygon & IEnhanceProperty;
 
         this.likeRectangle.setOptions({ path, ...this.opts });

@@ -61,7 +61,7 @@ export default class PolygonEditorRanging {
     }
 
     /**
-     * 
+     *
      */
     public setEditingMidTipMarkerListPath(path: string) {
         this.editingMidTipMarkerListPath = path;
@@ -69,8 +69,8 @@ export default class PolygonEditorRanging {
     }
 
     /**
-     * 
-     * @returns 
+     *
+     * @returns
      */
     private getEditingMidTipMarkerList() {
         const { singleRingListHandle } = this.polygonEditor!;
@@ -127,7 +127,7 @@ export default class PolygonEditorRanging {
 
     /**
      * 注册多边形编辑器，可操作点位事件
-     * @param polygonEditor 
+     * @param polygonEditor
      */
     public open(polygonEditor: AMap.PolygonEditor) {
         this.start(polygonEditor);
@@ -135,7 +135,7 @@ export default class PolygonEditorRanging {
 
     /**
      * 注册多边形编辑器，可操作点位事件
-     * @param polygonEditor 
+     * @param polygonEditor
      */
     public start(polygonEditor: AMap.PolygonEditor) {
         if (!polygonEditor && !this.polygonEditor) {
@@ -158,20 +158,25 @@ export default class PolygonEditorRanging {
 
         // 鼠标点下
         this.map.on('mousedown', this.onMouseDown);
+        this.map.on('touchstart', this.onMouseDown);
 
         // 鼠标移动，判断是否命中了计算 PolygonEditor 的计算处理
         this.map.on('mousemove', this.onMovePolygonEditorPoint);
+        this.map.on('touchmove', this.onMovePolygonEditorPoint);
 
         // 中间点和操作点分开控制
         // 操作点的计算距离是：白色点 - 白色点
         // 中间点的计算距离是：蓝色点 - 白色点
         this.map.on('mousemove', this.onMovePolygonEditorMidPoint);
+        this.map.on('touchmove', this.onMovePolygonEditorMidPoint);
 
         // 移动到边线时，显示线距离
         this.map.on('mousemove', this.onInPolygonEditorLine);
+        this.map.on('touchmove', this.onInPolygonEditorLine);
 
         // 鼠标松开
         this.map.on('mouseup', this.onMouseUp);
+        this.map.on('touchend', this.onMouseUp);
 
         return this;
     }
@@ -192,15 +197,20 @@ export default class PolygonEditorRanging {
         this.polygonEditor?.off('addnode', this.onPolygonEditorAdjust);
         // 鼠标点下
         this.map.off('mousedown', this.onMouseDown);
+        this.map.off('touchstart', this.onMouseDown);
 
         // 鼠标移动
         this.map.off('mousemove', this.onMovePolygonEditorPoint);
+        this.map.off('touchmove', this.onMovePolygonEditorPoint);
         this.map.off('mousemove', this.onMovePolygonEditorMidPoint);
+        this.map.off('touchmove', this.onMovePolygonEditorMidPoint);
 
         // 移动到边线时，显示线距离
         this.map.off('mousemove', this.onInPolygonEditorLine);
+        this.map.off('touchmove', this.onInPolygonEditorLine);
         // 鼠标松开
         this.map.off('mouseup', this.onMouseUp);
+        this.map.off('touchend', this.onMouseUp);
     }
 
     private onPolygonEditorAdjust = ({ target }: Common.Event) => {
@@ -278,13 +288,14 @@ export default class PolygonEditorRanging {
 
     /**
      * 开始边线测距
-     * @param polygon 
-     * @returns 
+     * @param polygon
+     * @returns
      */
     public startLineRanging(polygon: AMap.Polygon) {
         if (!polygon) {
             throw new Error('polygonEditor not found');
         }
+
         if (this.polygon) return;
 
         this.polygon = polygon;
@@ -384,8 +395,11 @@ export default class PolygonEditorRanging {
     private reset() {
         this.startPosition = null;
         this.lastPosition = null;
+
         this.removeDistanceText();
+
         this.removeLineDistanceText();
+
         return this;
     }
 
@@ -394,6 +408,7 @@ export default class PolygonEditorRanging {
         this.reset();
         this.stop();
         this.circleMarkers!.destroy();
+        // TODO bug 未销毁 mid 点位
         return this;
     }
 

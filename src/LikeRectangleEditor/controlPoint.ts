@@ -92,6 +92,7 @@ class ControlPoint {
         this.point.off('dragstart', this.onDragStart);
         this.point.off('dragging', this.onDragging);
         this.point.off('dragend', this.onDragEnd);
+        console.log('销毁完成');
     }
 
     onMouseOver() {

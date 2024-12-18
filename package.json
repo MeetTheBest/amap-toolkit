@@ -1,10 +1,15 @@
 {
-    "name": "gaode-tools",
+    "name": "amap-toolkit",
     "version": "0.0.7-beta8",
     "type": "module",
     "author": "fengjian",
     "description": "高德工具 多边型编辑器测距工具等",
     "keywords": [
+        "amap-toolki",
+        "amap-helper",
+        "amap-extender",
+        "ampa-addon",
+        "amap-editor",
         "gaode",
         "polygon",
         "polygonEditor",
@@ -16,12 +21,12 @@
     "files": [
         "dist/"
     ],
-    "main": "./dist/gaode-tools.umd.js",
-    "module": "./dist/gaode-tools.es.js",
+    "main": "./dist/amap-toolkit.umd.js",
+    "module": "./dist/amap-toolkit.es.js",
     "exports": {
         ".": {
-            "import": "./dist/gaode-tools.es.js",
-            "require": "./dist/gaode-tools.umd.js"
+            "import": "./dist/amap-toolkit.es.js",
+            "require": "./dist/amap-toolkit.umd.js"
         }
     },
     "scripts": {
@@ -41,6 +46,7 @@
     },
     "dependencies": {
         "@types/node": "^20.8.3",
+        "el-rotator": "file:.yalc/el-rotator",
         "lodash-es": "^4.17.21",
         "moveable": "^0.51.2",
         "vue": "^3.3.4"
@@ -48,10 +54,10 @@
     "publishConfig": {
         "registry": "https://registry.npmjs.org/"
     },
-    "homepage": "https://github.com/MeetTheBest/gaode-tools",
+    "homepage": "https://github.com/MeetTheBest/amap-toolkit",
     "repository": {
         "type": "git",
-        "url": "https://github.com/MeetTheBest/gaode-tools.git"
+        "url": "https://github.com/MeetTheBest/amap-toolkit.git"
     },
     "license": "MIT"
 }

@@ -38,7 +38,7 @@ export default class PolygonEditorEvent extends Event {
     }
 
     /**
-     * 
+     *
      */
     public setEditingMidTipMarkerListPath(path: string) {
         this.editingMidTipMarkerListPath = path;
@@ -47,7 +47,7 @@ export default class PolygonEditorEvent extends Event {
 
     /**
      * 获取编辑中间点标记列表
-     * @returns 
+     * @returns
      */
     private getEditingMidTipMarkerList() {
         const { singleRingListHandle } = this.polygonEditor!;

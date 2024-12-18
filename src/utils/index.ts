@@ -21,15 +21,15 @@ export const formatNumber = (num: number, precision = 2) => {
 /**
  * 是否大于最大安全数
  * @param n
- * @returns 
+ * @returns
  */
 export const isLimitMaxInteger = (n: number) => Math.abs(n) > Number.MAX_SAFE_INTEGER;
 
 /**
  * 创建文本
- * @param text 
+ * @param text
  * @param style 自定义文本样式
- * @returns 
+ * @returns
  */
 export const createText = (text = '', style = {}) => {
     return new AMap.Text({ text, style: { ...TEXT_STYLE, ...style }, offset: [0, -10] });
@@ -37,9 +37,9 @@ export const createText = (text = '', style = {}) => {
 
 /**
  * 计算两个点位的距离
- * @param position 
- * @param p2 
- * @returns 
+ * @param position
+ * @param p2
+ * @returns
  */
 export const computePoint2PointDistance = (p1: AMap.LngLat, p2: AMap.LngLat): Common.IDistanceText => {
     const textPos = p1.divideBy(2).add(p2.divideBy(2));

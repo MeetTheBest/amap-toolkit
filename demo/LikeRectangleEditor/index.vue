@@ -50,10 +50,10 @@ const createLikeRectangle = () => {
     likeRectangleIns = new LikeRectangle(likeRectangleOptions);
 
     // 旋转时，地图临时不可拖拽
-    likeRectangleIns.on("rotateStart", () =>
+    likeRectangleIns!.on("rotateStart", () =>
         mapIns!.setStatus({ dragEnable: false })
     );
-    likeRectangleIns.on("rotateEnd", () =>
+    likeRectangleIns!.on("rotateEnd", () =>
         mapIns!.setStatus({ dragEnable: true })
     );
 
@@ -65,8 +65,8 @@ const createLikeRectangle = () => {
 const createLikeRectangleEditor = () => {
     likeRectangleEditorIns = new LikeRectangleEditor(
         mapIns!,
-        likeRectangleIns as LikeRectangle,
-        { isMobile: true }
+        likeRectangleIns as LikeRectangle
+        // { isMobile: true }
     );
     likeRectangleEditorIns.open();
 };
