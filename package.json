@@ -5,18 +5,14 @@
     "author": "fengjian",
     "description": "高德工具 多边型编辑器测距工具等",
     "keywords": [
-        "amap-toolki",
+        "map",
+        "amap",
+        "toolkit",
+        "amap-toolkit",
         "amap-helper",
-        "amap-extender",
-        "ampa-addon",
-        "amap-editor",
-        "gaode",
-        "polygon",
-        "polygonEditor",
-        "ranging",
-        "高德工具",
-        "多边形测距",
-        "多边形编辑器测距"
+        "高德",
+        "地图",
+        "高德地图"
     ],
     "files": [
         "dist/"
