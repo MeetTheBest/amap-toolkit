@@ -142,7 +142,7 @@ class Rotatable extends Event {
         const containerDOM = document.querySelector(`[data-rotatable-ref="${this.moveableElementId}"]`) as HTMLElement;
         const ableDOM = document.querySelector(`[data-rotatable-ref="${this.customRotationDOMId}"]`) as HTMLElement;
 
-        this.offset = this.calcInitOffset() + this.radius;
+        this.offset = this.calcInitOffset();
 
         const options = { rotate: this.initAngle, top: -this.offset, able: ableDOM };
         this.elementRotatorIns = new ElementRotator(containerDOM, options);
@@ -338,8 +338,8 @@ class Rotatable extends Event {
         const mitPointPixel = this.mapIns.lngLatToContainer(this.midPoint);
         const centerPixel = this.mapIns.lngLatToContainer(this.center);
 
-        // 先直接放到中点上 this.radius/2:圆中心; +4: 上下边宽
-        return (computePointDistance(mitPointPixel, centerPixel)) - (this.radius / 2 + 4);
+        // 线段中点到矩形中心点的平面距离
+        return computePointDistance(mitPointPixel, centerPixel);
     }
 
     updateRotationAbleOffset = () => {

@@ -1876,7 +1876,7 @@ class ca extends Lt {
     });
     a(this, "setMarkerRotatable", () => {
       const n = document.querySelector(`[data-rotatable-ref="${this.moveableElementId}"]`), o = document.querySelector(`[data-rotatable-ref="${this.customRotationDOMId}"]`);
-      this.offset = this.calcInitOffset() + this.radius;
+      this.offset = this.calcInitOffset();
       const i = { rotate: this.initAngle, top: -this.offset, able: o };
       this.elementRotatorIns = new la(n, i), this.registryEvent();
     });
@@ -2018,7 +2018,7 @@ class ca extends Lt {
     if (!this.mapIns)
       return 0;
     const n = this.mapIns.lngLatToContainer(this.midPoint), o = this.mapIns.lngLatToContainer(this.center);
-    return ha(n, o) - (this.radius / 2 + 4);
+    return ha(n, o);
   }
   // setRotationPoint() {
   // }
