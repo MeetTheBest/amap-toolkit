@@ -1,12 +1,12 @@
 import { default as RotationOptions } from './type';
 import { default as Event } from '../Event';
 import { default as LikeRectangle } from '../LikeRectangle';
-import { default as Moveable } from 'moveable';
+import { default as ElementRotator } from 'element-rotator';
 
 declare class Rotatable extends Event {
     likeRectangleIns: LikeRectangle & AMap.Polygon;
     opts: RotationOptions;
-    moveableIns: Moveable | null;
+    elementRotatorIns: ElementRotator | null;
     rotationPointIns: AMap.Marker | null;
     midPoint: AMap.LngLat;
     initAngle: number;
@@ -425,12 +425,12 @@ declare class Rotatable extends Event {
      * 旋转点（即中心点）
      */
     createRotationPoint(): Promise<void>;
-    genMarkerContent: (rotate?: number) => string;
+    genMarkerContent: () => string;
     setMarkerRotatable: () => void;
     registryEvent(): void;
     destroyEvent(): void;
     onRotateStart: () => void;
-    onRotate: (event: any) => void;
+    onRotate: (data: any) => void;
     onRotateEnd: () => void;
     rotate: (deg: number) => void;
     calcRotatePoint: (point: AMap.Pixel, center: AMap.Pixel, angle: number) => {

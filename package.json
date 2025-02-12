@@ -1,6 +1,6 @@
 {
     "name": "amap-toolkit",
-    "version": "0.0.7-beta8",
+    "version": "0.0.7-beta9",
     "type": "module",
     "author": "fengjian",
     "description": "高德工具 多边型编辑器测距工具等",
@@ -38,6 +38,7 @@
         "@amap/amap-jsapi-loader": "^1.0.1",
         "@amap/amap-jsapi-types": "^0.0.13",
         "@types/lodash-es": "^4.17.8",
+        "@types/node": "^22.13.1",
         "@vitejs/plugin-vue": "^4.2.3",
         "rimraf": "^5.0.1",
         "typescript": "^5.0.2",
@@ -45,10 +46,8 @@
         "vite-plugin-dts": "^3.3.1"
     },
     "dependencies": {
-        "@types/node": "^20.8.3",
-        "el-rotator": "file:.yalc/el-rotator",
+        "element-rotator": "^0.0.1",
         "lodash-es": "^4.17.21",
-        "moveable": "^0.51.2",
         "vue": "^3.3.4"
     },
     "publishConfig": {

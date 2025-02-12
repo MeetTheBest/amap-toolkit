@@ -1,5 +1,5 @@
 import { isFinite } from 'lodash-es'
-import Moveable, { makeAble } from 'moveable';
+import ElementRotator from 'element-rotator';
 
 import LikeRectangle from '../LikeRectangle';
 import Event from '../Event';
@@ -14,7 +14,7 @@ const DEFAULT_RADIUS = 10;
 class Rotatable extends Event {
     likeRectangleIns!: LikeRectangle & AMap.Polygon;
     opts: RotationOptions;
-    moveableIns: Moveable | null = null;
+    elementRotatorIns: ElementRotator | null = null;
     rotationPointIns: AMap.Marker | null = null;
     midPoint!: AMap.LngLat;
     initAngle!: number;
@@ -68,8 +68,8 @@ class Rotatable extends Event {
     }
 
     reset() {
-        this.moveableIns?.destroy?.();
-        this.moveableIns = null;
+        this.elementRotatorIns?.destroy?.();
+        this.elementRotatorIns = null;
         this.rotationPointIns?.destroy?.();
         this.rotationPointIns = null;
     }
@@ -104,101 +104,65 @@ class Rotatable extends Event {
         this.rotationPointIns = new AMap.Marker({
             map: this.mapIns,
             position: this.center,
-            content: this.genMarkerContent(this.initAngle),
+            content: this.genMarkerContent(),
         });
 
         await Promise.resolve();
+
         this.setMarkerRotatable();
     }
 
-    genMarkerContent = (rotate = 0) => {
+    genMarkerContent = () => {
         const w = 0.05;
         const boxStyle = `width:${w}px; height:${w}px;`;
-        rotate = Number.isNaN(+rotate) ? 0 : +rotate;
 
-        // const dynamicDOM = `<div style="visibility: visible; background: red; height: ${w}px; width: ${w}px"></div>`;
-        const dynamicDOM = `<div style="visibility: hidden; background: transparent; height: ${w}px; width: ${w}px"></div>`;
+        const styleStr = Object.entries({
+            display: 'inline-block',
+            width: `${this.radius}px`,
+            height: `${this.radius}px`,
+            cursor: 'move',
+            background: '#fff',
+            border: '2px solid #cc6666',
+            'border-radius': '50%',
+            'transform-origin': '50% 100%',
+        }).reduce((str, [prop, value]) => str += `${prop}:${value};`, '');
+
         const markerContent = `
             <div
-            style="${boxStyle}"
-            data-rotatable-ref="${this.moveableElementId}"
+                style="position: relative; ${boxStyle}; background: red;"
+                data-rotatable-ref="${this.moveableElementId}"
             >
-                <div
-                    data-rotatable-ref="${this.targetElementId}"
-                    style="${boxStyle} transform: translate(0,0) rotate(${rotate}deg);">
-                    ${dynamicDOM}
-                </div>
+                <div data-rotatable-ref=${this.customRotationDOMId} style="${styleStr}"></div>
             </div>
         `;
         return markerContent;
     };
 
     setMarkerRotatable = () => {
-        this.offset = this.calcInitOffset();
-        const self = this;
+        const containerDOM = document.querySelector(`[data-rotatable-ref="${this.moveableElementId}"]`) as HTMLElement;
+        const ableDOM = document.querySelector(`[data-rotatable-ref="${this.customRotationDOMId}"]`) as HTMLElement;
 
-        const CustomRotation = makeAble('customRotation', {
-            render(moveable, renderer) {
-                const rect = moveable.getRect();
-                const { pos1, pos2 } = moveable.state;
-                return renderer.createElement(
-                    'div',
-                    {
-                        key: 'custom-rotation',
-                        id: self.customRotationDOMId,
-                        className: 'moveable-custom-rotation',
-                        style: {
-                            display: 'inline-block',
-                            position: 'absolute',
-                            transform:
-                                `translate(-50%, -100%)` +
-                                ` translate(${(pos1[0] + pos2[0]) / 2}px, ${(pos1[1] + pos2[1]) / 2}px)` +
-                                ` rotate(${rect.rotation}deg) translateY(-${self.offset}px)`,
-                            width: `${self.radius}px`,
-                            height: `${self.radius}px`,
-                            cursor: 'move',
-                            background: '#fff',
-                            border: '2px solid #cc6666',
-                            borderRadius: '50%',
-                            transformOrigin: '50% 100%',
-                        },
-                    },
-                    ['\n        '],
-                );
-            },
-        });
+        this.offset = this.calcInitOffset() + this.radius;
 
-        const element$0 = document.querySelector(`[data-rotatable-ref="${this.moveableElementId}"]`) as HTMLElement;
-        const rotatableTarget = document.querySelector(`[data-rotatable-ref="${this.targetElementId}"]`) as HTMLElement;
-
-        this.moveableIns = new Moveable(element$0, {
-            target: rotatableTarget,
-            ables: [CustomRotation],
-            props: { customRotation: true },
-            rotatable: true,
-            throttleRotate: 0,
-            origin: false,
-            hideDefaultLines: true,
-            rotationTarget: '.moveable-custom-rotation',
-            rotationPosition: 'none',
-        });
+        const options = { rotate: this.initAngle, top: -this.offset, able: ableDOM };
+        this.elementRotatorIns = new ElementRotator(containerDOM, options);
 
         this.registryEvent();
     };
 
     registryEvent() {
-        if (!this.moveableIns) return;
-        this.moveableIns.on('rotateStart', this.onRotateStart);
-        this.moveableIns.on('rotate', this.onRotate);
-        this.moveableIns.on('rotateEnd', this.onRotateEnd);
+        if (!this.elementRotatorIns) return;
+        this.elementRotatorIns.on('rotateStart', this.onRotateStart);
+        this.elementRotatorIns.on('rotate', this.onRotate);
+        this.elementRotatorIns.on('rotateEnd', this.onRotateEnd);
         this.mapIns?.on?.('zoomchange', this.updateRotationAbleOffset);
     }
 
     destroyEvent() {
-        if (!this.moveableIns) return;
-        this.moveableIns.off('rotateStart', this.onRotateStart);
-        this.moveableIns.off('rotate', this.onRotate);
-        this.moveableIns.off('rotateEnd', this.onRotateEnd);
+        if (!this.elementRotatorIns) return;
+        this.elementRotatorIns.off('rotateStart', this.onRotateStart);
+        this.elementRotatorIns.off('rotate', this.onRotate);
+        this.elementRotatorIns.off('rotateEnd', this.onRotateEnd);
         this.mapIns?.off?.('zoomchange', this.updateRotationAbleOffset);
     }
 
@@ -206,10 +170,9 @@ class Rotatable extends Event {
         this.emit('rotateStart', this.likeRectangleIns);
     }
 
-    onRotate = (event) => {
-        event.target.style.transform = event.drag.transform;
-        const angle = +this.getDOMTransformRotate(event.target) - this.initAngle;
-        this.rotate(angle);
+    onRotate = (data) => {
+        const { event, rotate } = data;
+        this.rotate(rotate - this.initAngle);
         this.emit('rotate', event);
     }
 
@@ -375,9 +338,8 @@ class Rotatable extends Event {
         const mitPointPixel = this.mapIns.lngLatToContainer(this.midPoint);
         const centerPixel = this.mapIns.lngLatToContainer(this.center);
 
-
-        // 先直接放到中点上 this.radius/2:圆中心; +2: 线宽
-        return (computePointDistance(mitPointPixel, centerPixel)) - (this.radius / 2 + 2);
+        // 先直接放到中点上 this.radius/2:圆中心; +4: 上下边宽
+        return (computePointDistance(mitPointPixel, centerPixel)) - (this.radius / 2 + 4);
     }
 
     updateRotationAbleOffset = () => {
