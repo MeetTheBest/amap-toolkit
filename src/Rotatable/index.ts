@@ -142,9 +142,9 @@ class Rotatable extends Event {
         const containerDOM = document.querySelector(`[data-rotatable-ref="${this.moveableElementId}"]`) as HTMLElement;
         const ableDOM = document.querySelector(`[data-rotatable-ref="${this.customRotationDOMId}"]`) as HTMLElement;
 
-        this.offset = this.calcInitOffset();
+        const offset = this.calcInitOffset();
 
-        const options = { rotate: this.initAngle, top: -this.offset, able: ableDOM };
+        const options = { rotate: this.initAngle, top: -offset, able: ableDOM };
         this.elementRotatorIns = new ElementRotator(containerDOM, options);
 
         this.registryEvent();
@@ -343,19 +343,8 @@ class Rotatable extends Event {
     }
 
     updateRotationAbleOffset = () => {
-        const dom = document.querySelector(`#${this.customRotationDOMId}`) as HTMLElement;
-
-        let offset = null;
-        let transformStr = dom?.style?.transform || '';
-        transformStr.replace(/translateY\((.*)px\)/g, (_m, $1) => (offset = $1));
-        if (!offset) return;
-
-        const nextOffset = `-${this.calcInitOffset()}`;
-        transformStr = transformStr.replace(new RegExp(offset, 'g'), nextOffset);
-        dom.style.transform = transformStr;
-
-        // 设置 offset 值
-        this.offset = this.calcInitOffset();
+        const ableDOM = this.elementRotatorIns.target;
+        ableDOM.style.top = `-${this.calcInitOffset()}`;
     }
 
     private onDragStart = async () => {
