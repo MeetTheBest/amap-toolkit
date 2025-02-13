@@ -36,7 +36,15 @@
         >
             类矩形操作
         </span>
+        <span
+            :class="['btn', isCircleToPolygonPage ? 'active' : '']"
+            @click="toCircleToPolygonPage"
+        >
+            圆转多边形
+        </span>
     </div>
+
+    <CircleToPolygon v-if="isCircleToPolygonPage" />
     <PolygonRanging v-if="isPolygonRangingPage" />
     <PolygonRangingInDrawing v-if="isPolygonRangingInDrawingPage" />
     <PolygonEditorRanging v-if="isPolygonEditorRangingPage" />
@@ -50,6 +58,7 @@
 <script lang="ts" setup>
 import { ref, computed } from "vue";
 
+import CircleToPolygon from "./CircleToPolygon/index.vue";
 import PolygonRanging from "./PolygonRanging/index.vue";
 import PolygonRangingInDrawing from "./PolygonRangingInDrawing/index.vue";
 import PolygonEditorRanging from "./PolygonEditorRanging/index.vue";
@@ -64,9 +73,10 @@ enum Page {
     PolygonEditorEvent = "PolygonEditorEvent",
     LikeRectangle = "LikeRectangle",
     LikeRectangleEditor = "LikeRectangleEditor",
+    CircleToPolygon = "CircleToPolygon",
 }
 
-const page = ref(Page.LikeRectangleEditor);
+const page = ref(Page.PolygonRanging);
 
 const isPolygonRangingPage = computed(() => page.value === Page.PolygonRanging);
 const isPolygonRangingInDrawingPage = computed(
@@ -82,6 +92,9 @@ const isLikeRectangle = computed(() => page.value === Page.LikeRectangle);
 const isLikeRectangleEdtior = computed(
     () => page.value === Page.LikeRectangleEditor
 );
+const isCircleToPolygonPage = computed(
+    () => page.value === Page.CircleToPolygon
+);
 
 const toPolygonRangingPage = () => (page.value = Page.PolygonRanging);
 const toPolygonRangingInDrawingPage = () =>
@@ -92,6 +105,7 @@ const toPolygonEditorEventPage = () => (page.value = Page.PolygonEditorEvent);
 const toLikeRectanglePage = () => (page.value = Page.LikeRectangle);
 const toLikeRectangleEdtitorPage = () =>
     (page.value = Page.LikeRectangleEditor);
+const toCircleToPolygonPage = () => (page.value = Page.CircleToPolygon);
 </script>
 
 <style>

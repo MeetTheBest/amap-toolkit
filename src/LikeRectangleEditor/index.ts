@@ -122,6 +122,10 @@ class LikeRectangleEditor {
     }
 
     registryControlPoints() {
+        (this.controlPoints || []).forEach(controlPoint => {
+            controlPoint.destroyEvent();
+        });
+
         // @ts-ignore
         const controlPoints = (this.polygonEditor?.singleRingListHandle?.list?.editingVertexMarkerList ?? []) as AMap.CircleMarker[];
 

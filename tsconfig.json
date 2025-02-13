@@ -1,35 +1,35 @@
 {
-  "compilerOptions": {
-    "target": "ES2016",
-    "useDefineForClassFields": true,
-    "module": "ES6",
-    "lib": [
-      "ESNext",
-      "DOM"
-    ],
-    "skipLibCheck": true,
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": false,
-    "types": [
-      "node"
+    "compilerOptions": {
+        "target": "ES2016",
+        "useDefineForClassFields": true,
+        "module": "ES6",
+        "lib": [
+            "ESNext",
+            "DOM"
+        ],
+        "skipLibCheck": true,
+        /* Bundler mode */
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        /* Linting */
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": false,
+        "types": [
+            "node"
+        ]
+    },
+    "include": [
+        "src",
+        "demo",
+        "demo/**/*.ts",
+        "demo/**/*.d.ts",
+        "demo/**/*.tsx",
+        "demo/**/*.vue"
     ]
-  },
-  "include": [
-    "src",
-    "demo",
-    "demo/**/*.ts",
-    "demo/**/*.d.ts",
-    "demo/**/*.tsx",
-    "demo/**/*.vue"
-  ]
 }

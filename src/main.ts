@@ -8,21 +8,21 @@ import LikeRectangle from './LikeRectangle';
 import LikeRectangleEditor from './LikeRectangleEditor';
 
 export default {
-  PolygonRangingInDrawing,
-  PolygonEditorRanging,
-  PolygonEditorEvent,
-  PolygonRanging,
-  LikeRectangle,
-  LikeRectangleEditor,
+    PolygonRangingInDrawing,
+    PolygonEditorRanging,
+    PolygonEditorEvent,
+    PolygonRanging,
+    LikeRectangle,
+    LikeRectangleEditor,
 }
 
 export {
-  PolygonRangingInDrawing,
-  PolygonEditorRanging,
-  PolygonEditorEvent,
-  PolygonRanging,
-  LikeRectangle,
-  LikeRectangleEditor,
+    PolygonRangingInDrawing,
+    PolygonEditorRanging,
+    PolygonEditorEvent,
+    PolygonRanging,
+    LikeRectangle,
+    LikeRectangleEditor,
 };
 
 export type { ILikeRectangleOptions } from './LikeRectangle/type';
