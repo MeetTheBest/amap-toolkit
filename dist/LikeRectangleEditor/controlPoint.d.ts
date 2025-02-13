@@ -6,6 +6,8 @@ declare class ControlPoint {
     center: AMap.LngLat;
     editor: LikeRectangleEditor;
     isEnabled: boolean;
+    leftLineK1: null;
+    rightLineK1: null;
     constructor(editor: LikeRectangleEditor, point: AMap.CircleMarker, points: AMap.CircleMarker[]);
     get len(): number;
     get extData(): any;
@@ -421,12 +423,16 @@ declare class ControlPoint {
     onDragEnd(data: IObject): void;
     /**
      * 更新下一个左节点位置
+     * @param operatePointPixel - 操作点坐标
+     * @param data
      */
-    updateNextLeftPoint(endPixel: AMap.Pixel, data: IObject): void;
+    updateNextLeftPoint(operatePointPixel: AMap.Pixel, data: IObject): void;
     /**
      * 更新下一个右节点位置
+     * @param operatePointPixel - 操作点坐标
+     * @param data
      */
-    updateNextRightPoint(endPixel: AMap.Pixel, data: IObject): void;
+    updateNextRightPoint(operatePointPixel: AMap.Pixel, data: IObject): void;
     dispatch(point: AMap.CircleMarker, pixel: AMap.Pixel, originEvent: any): void;
 }
 export default ControlPoint;
