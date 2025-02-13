@@ -3,7 +3,7 @@
     "version": "0.0.7-beta9",
     "type": "module",
     "author": "fengjian",
-    "description": "高德工具 多边型编辑器测距工具等",
+    "description": "高德地图图形绘制工具扩展，支持多边形测距、多边形编辑器测距、矩形编辑器等",
     "keywords": [
         "map",
         "amap",
