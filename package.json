@@ -42,7 +42,7 @@
         "vite-plugin-dts": "^3.3.1"
     },
     "dependencies": {
-        "element-rotator": "^0.0.1",
+        "element-rotator": "^0.0.2",
         "lodash-es": "^4.17.21",
         "vue": "^3.3.4"
     },
