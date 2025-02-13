@@ -1,3 +1,5 @@
+import { uniq } from 'lodash-es';
+
 import type { ILikeRectangle, ILikeRectangleOptions, IEnhanceProperty } from './type';
 import Event from '../Event';
 import Rotatable from '../Rotatable';
@@ -133,7 +135,9 @@ class LikeRectangle extends Event implements ILikeRectangle {
     create(): AMap.Polygon & IEnhanceProperty {
         const path = this.opts?.path || [this.leftTop, this.rightTop, this.rightBottom, this.leftBottom];
 
-        if (path.length !== 4) {
+        const len = uniq(path.join(';').split(';')).length;
+
+        if (len !== 4) {
             throw new Error('invalid path');
         }
 
