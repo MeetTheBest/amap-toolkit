@@ -1,6 +1,6 @@
 {
     "name": "amap-toolkit",
-    "version": "0.0.7-beta11",
+    "version": "0.0.7-beta12",
     "type": "module",
     "author": "fengjian",
     "description": "高德地图图形绘制工具扩展，支持多边形测距、多边形编辑器测距、矩形编辑器等",
@@ -28,7 +28,8 @@
     "scripts": {
         "dev": "vite",
         "build": "rimraf -rf ./dist && tsc && vite build",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "publish": "npm run build && npm publish"
     },
     "devDependencies": {
         "@amap/amap-jsapi-loader": "^1.0.1",
