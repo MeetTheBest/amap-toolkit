@@ -21,6 +21,8 @@ import { PolygonRanging } from "amap-toolkit";
 const mapIns = new AMap.Map("container");
 
 const polygonRangingIns = new PolygonRanging(mapIns);
+
+polygonRangingIns.open(); // .start() 也可以
 ```
 
 ## 本地运行
@@ -174,7 +176,7 @@ polygonEditorEventIns.clearAll();
 
 ### 类矩形
 
-为什么要做这个？因为高德的 `Rectangle` 是通过`2`点（西南点和东北点）创建矩形，所以无法创建出非水平方向的矩形，且不支持渲染功能；
+为什么要做这个？因为高德的 `Rectangle` 是通过`2`点（西南点和东北点）创建矩形，所以无法创建出非水平方向的矩形，且不支持旋转功能；
 
 **示例**
 
