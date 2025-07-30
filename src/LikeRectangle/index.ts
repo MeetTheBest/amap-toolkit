@@ -1,4 +1,4 @@
-import { uniq } from 'lodash-es';
+import { uniq } from '../utils/lodash';
 
 import type { ILikeRectangle, ILikeRectangleOptions, IEnhanceProperty } from './type';
 import Event from '../Event';

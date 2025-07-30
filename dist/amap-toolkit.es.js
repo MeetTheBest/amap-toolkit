@@ -1,33 +1,33 @@
-var Qe = Object.defineProperty, tn = Object.defineProperties;
-var en = Object.getOwnPropertyDescriptors;
-var $t = Object.getOwnPropertySymbols;
-var nn = Object.prototype.hasOwnProperty, on = Object.prototype.propertyIsEnumerable;
-var rt = (t, e, n) => e in t ? Qe(t, e, { enumerable: !0, configurable: !0, writable: !0, value: n }) : t[e] = n, b = (t, e) => {
-  for (var n in e || (e = {}))
-    nn.call(e, n) && rt(t, n, e[n]);
-  if ($t)
-    for (var n of $t(e))
-      on.call(e, n) && rt(t, n, e[n]);
-  return t;
-}, st = (t, e) => tn(t, en(e));
-var a = (t, e, n) => (rt(t, typeof e != "symbol" ? e + "" : e, n), n);
-var _ = (t, e, n) => new Promise((o, i) => {
-  var r = (h) => {
+var ht = Object.defineProperty, lt = Object.defineProperties;
+var ct = Object.getOwnPropertyDescriptors;
+var K = Object.getOwnPropertySymbols;
+var gt = Object.prototype.hasOwnProperty, ut = Object.prototype.propertyIsEnumerable;
+var O = (n, e, t) => e in n ? ht(n, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : n[e] = t, m = (n, e) => {
+  for (var t in e || (e = {}))
+    gt.call(e, t) && O(n, t, e[t]);
+  if (K)
+    for (var t of K(e))
+      ut.call(e, t) && O(n, t, e[t]);
+  return n;
+}, A = (n, e) => lt(n, ct(e));
+var r = (n, e, t) => (O(n, typeof e != "symbol" ? e + "" : e, t), t);
+var x = (n, e, t) => new Promise((i, o) => {
+  var s = (c) => {
     try {
-      l(n.next(h));
-    } catch (c) {
-      i(c);
+      h(t.next(c));
+    } catch (l) {
+      o(l);
     }
-  }, s = (h) => {
+  }, a = (c) => {
     try {
-      l(n.throw(h));
-    } catch (c) {
-      i(c);
+      h(t.throw(c));
+    } catch (l) {
+      o(l);
     }
-  }, l = (h) => h.done ? o(h.value) : Promise.resolve(h.value).then(r, s);
-  l((n = n.apply(t, e)).next());
+  }, h = (c) => c.done ? i(c.value) : Promise.resolve(c.value).then(s, a);
+  h((t = t.apply(n, e)).next());
 });
-const rn = {
+const dt = {
   "border-color": "#e1f5fe",
   "font-size": "12px",
   "border-radius": ".25rem",
@@ -35,43 +35,43 @@ const rn = {
   "border-width": 0,
   "text-align": "center",
   color: "#fff"
-}, at = () => Math.random().toString(16).substring(2), Ot = (t, e = 2) => Number.isNaN(+t) ? t : +t.toFixed(Math.max(e, 0)), E = (t) => Math.abs(t) > Number.MAX_SAFE_INTEGER, N = (t = "", e = {}) => new AMap.Text({ text: t, style: b(b({}, rn), e), offset: [0, -10] }), B = (t, e) => {
-  const n = t.divideBy(2).add(e.divideBy(2));
-  return { text: `${Math.round(t.distance(e))}米`, textPos: n };
+}, S = () => Math.random().toString(16).substring(2), Y = (n, e = 2) => Number.isNaN(+n) ? n : +n.toFixed(Math.max(e, 0)), v = (n) => Math.abs(n) > Number.MAX_SAFE_INTEGER, L = (n = "", e = {}) => new AMap.Text({ text: n, style: m(m({}, dt), e), offset: [0, -10] }), k = (n, e) => {
+  const t = n.divideBy(2).add(e.divideBy(2));
+  return { text: `${Math.round(n.distance(e))}米`, textPos: t };
 };
-let sn = class {
+let pt = class {
   constructor(e) {
-    a(this, "map");
+    r(this, "map");
     // 开始点位到鼠标位置的文本
-    a(this, "startPointToCursorText", null);
+    r(this, "startPointToCursorText", null);
     // 最后一次点位到鼠标位置的文本
-    a(this, "lastPointToCursorText", null);
+    r(this, "lastPointToCursorText", null);
     // 起始点位
-    a(this, "startPosition", null);
+    r(this, "startPosition", null);
     // 上次点击点位
-    a(this, "lastPosition", null);
+    r(this, "lastPosition", null);
     /**
      * 点图点击事件
      * @param {MapEvent} event
      */
-    a(this, "getClickPosition", (e) => {
-      const n = e.lnglat;
-      this.startPosition ? this.startPosition && (this.lastPosition = n, this.createDistanceText()) : this.startPosition = n;
+    r(this, "getClickPosition", (e) => {
+      const t = e.lnglat;
+      this.startPosition ? this.startPosition && (this.lastPosition = t, this.createDistanceText()) : this.startPosition = t;
     });
     /**
      * 获取新增围栏时，鼠标移动位置
      * @param {*} event
      */
-    a(this, "onMouseMoveInDrawPolygon", (e) => {
+    r(this, "onMouseMoveInDrawPolygon", (e) => {
       if (!this.startPosition || !this.lastPosition)
         return;
-      const n = e.lnglat;
+      const t = e.lnglat;
       this.updateDistanceText(
         this.startPointToCursorText,
-        B(this.startPosition, n)
+        k(this.startPosition, t)
       ), this.updateDistanceText(
         this.lastPointToCursorText,
-        B(this.lastPosition, n)
+        k(this.lastPosition, t)
       );
     });
     if (!e)
@@ -107,14 +107,14 @@ let sn = class {
    * @returns
    */
   createDistanceText() {
-    this.startPointToCursorText && this.lastPointToCursorText || (this.startPointToCursorText = N(), this.startPointToCursorText.setMap(this.map), this.lastPointToCursorText = N(), this.lastPointToCursorText.setMap(this.map));
+    this.startPointToCursorText && this.lastPointToCursorText || (this.startPointToCursorText = L(), this.startPointToCursorText.setMap(this.map), this.lastPointToCursorText = L(), this.lastPointToCursorText.setMap(this.map));
   }
-  updateDistanceText(e, { text: n, textPos: o }) {
-    e.setText(n), e.setPosition(o);
+  updateDistanceText(e, { text: t, textPos: i }) {
+    e.setText(t), e.setPosition(i);
   }
   removeDistanceText() {
-    var e, n;
-    (e = this.startPointToCursorText) == null || e.remove(), this.startPointToCursorText = null, (n = this.lastPointToCursorText) == null || n.remove(), this.lastPointToCursorText = null;
+    var e, t;
+    (e = this.startPointToCursorText) == null || e.remove(), this.startPointToCursorText = null, (t = this.lastPointToCursorText) == null || t.remove(), this.lastPointToCursorText = null;
   }
   reset() {
     return this.startPosition = null, this.lastPosition = null, this.removeDistanceText(), this;
@@ -123,917 +123,55 @@ let sn = class {
     return this.reset(), this.stop(), this;
   }
 };
-var an = typeof global == "object" && global && global.Object === Object && global;
-const ce = an;
-var ln = typeof self == "object" && self && self.Object === Object && self, hn = ce || ln || Function("return this")();
-const C = hn;
-var cn = C.Symbol;
-const w = cn;
-var ue = Object.prototype, un = ue.hasOwnProperty, gn = ue.toString, H = w ? w.toStringTag : void 0;
-function pn(t) {
-  var e = un.call(t, H), n = t[H];
-  try {
-    t[H] = void 0;
-    var o = !0;
-  } catch (r) {
-  }
-  var i = gn.call(t);
-  return o && (e ? t[H] = n : delete t[H]), i;
+function ft(n) {
+  return Array.isArray(n) ? Array.from(new Set(n)) : [];
 }
-var fn = Object.prototype, dn = fn.toString;
-function yn(t) {
-  return dn.call(t);
+function M(n) {
+  return typeof n != "number" ? !1 : Number.isFinite(n);
 }
-var mn = "[object Null]", Pn = "[object Undefined]", St = w ? w.toStringTag : void 0;
-function O(t) {
-  return t == null ? t === void 0 ? Pn : mn : St && St in Object(t) ? pn(t) : yn(t);
-}
-function S(t) {
-  return t != null && typeof t == "object";
-}
-var vn = "[object Symbol]";
-function yt(t) {
-  return typeof t == "symbol" || S(t) && O(t) == vn;
-}
-function ge(t, e) {
-  for (var n = -1, o = t == null ? 0 : t.length, i = Array(o); ++n < o; )
-    i[n] = e(t[n], n, t);
-  return i;
-}
-var Tn = Array.isArray;
-const A = Tn;
-var bn = 1 / 0, At = w ? w.prototype : void 0, Dt = At ? At.toString : void 0;
-function pe(t) {
-  if (typeof t == "string")
+function G(n, e, t) {
+  if (n == null)
     return t;
-  if (A(t))
-    return ge(t, pe) + "";
-  if (yt(t))
-    return Dt ? Dt.call(t) : "";
-  var e = t + "";
-  return e == "0" && 1 / t == -bn ? "-0" : e;
+  const i = Array.isArray(e) ? e : e.split(/\.|\[|\]/).filter(Boolean);
+  let o = n;
+  for (const s of i) {
+    if (o == null)
+      return t;
+    o = o[s];
+  }
+  return o === void 0 ? t : o;
 }
-function W(t) {
-  var e = typeof t;
-  return t != null && (e == "object" || e == "function");
-}
-function Mn(t) {
+function mt(n, e) {
+  if (n == null)
+    return {};
+  const t = m({}, n), i = Array.isArray(e) ? e : [e];
+  for (const o of i)
+    delete t[o];
   return t;
 }
-var En = "[object AsyncFunction]", xn = "[object Function]", Ln = "[object GeneratorFunction]", Cn = "[object Proxy]";
-function fe(t) {
-  if (!W(t))
-    return !1;
-  var e = O(t);
-  return e == xn || e == Ln || e == En || e == Cn;
-}
-var wn = C["__core-js_shared__"];
-const lt = wn;
-var jt = function() {
-  var t = /[^.]+$/.exec(lt && lt.keys && lt.keys.IE_PROTO || "");
-  return t ? "Symbol(src)_1." + t : "";
-}();
-function Rn(t) {
-  return !!jt && jt in t;
-}
-var In = Function.prototype, _n = In.toString;
-function D(t) {
-  if (t != null) {
-    try {
-      return _n.call(t);
-    } catch (e) {
-    }
-    try {
-      return t + "";
-    } catch (e) {
-    }
-  }
-  return "";
-}
-var kn = /[\\^$.*+?()[\]{}|]/g, $n = /^\[object .+?Constructor\]$/, On = Function.prototype, Sn = Object.prototype, An = On.toString, Dn = Sn.hasOwnProperty, jn = RegExp(
-  "^" + An.call(Dn).replace(kn, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
-);
-function Nn(t) {
-  if (!W(t) || Rn(t))
-    return !1;
-  var e = fe(t) ? jn : $n;
-  return e.test(D(t));
-}
-function Bn(t, e) {
-  return t == null ? void 0 : t[e];
-}
-function j(t, e) {
-  var n = Bn(t, e);
-  return Nn(n) ? n : void 0;
-}
-var Fn = j(C, "WeakMap");
-const ut = Fn;
-var Nt = Object.create, Un = function() {
-  function t() {
-  }
-  return function(e) {
-    if (!W(e))
-      return {};
-    if (Nt)
-      return Nt(e);
-    t.prototype = e;
-    var n = new t();
-    return t.prototype = void 0, n;
-  };
-}();
-const Kn = Un;
-function zn(t, e, n) {
-  switch (n.length) {
-    case 0:
-      return t.call(e);
-    case 1:
-      return t.call(e, n[0]);
-    case 2:
-      return t.call(e, n[0], n[1]);
-    case 3:
-      return t.call(e, n[0], n[1], n[2]);
-  }
-  return t.apply(e, n);
-}
-function Gn() {
-}
-function Hn(t, e) {
-  var n = -1, o = t.length;
-  for (e || (e = Array(o)); ++n < o; )
-    e[n] = t[n];
-  return e;
-}
-var Yn = 800, Xn = 16, Vn = Date.now;
-function Wn(t) {
-  var e = 0, n = 0;
-  return function() {
-    var o = Vn(), i = Xn - (o - n);
-    if (n = o, i > 0) {
-      if (++e >= Yn)
-        return arguments[0];
-    } else
-      e = 0;
-    return t.apply(void 0, arguments);
-  };
-}
-function qn(t) {
-  return function() {
-    return t;
-  };
-}
-var Zn = function() {
-  try {
-    var t = j(Object, "defineProperty");
-    return t({}, "", {}), t;
-  } catch (e) {
-  }
-}();
-const tt = Zn;
-var Jn = tt ? function(t, e) {
-  return tt(t, "toString", {
-    configurable: !0,
-    enumerable: !1,
-    value: qn(e),
-    writable: !0
-  });
-} : Mn;
-const Qn = Jn;
-var to = Wn(Qn);
-const eo = to;
-function no(t, e) {
-  for (var n = -1, o = t == null ? 0 : t.length; ++n < o && e(t[n], n, t) !== !1; )
-    ;
-  return t;
-}
-function oo(t, e, n, o) {
-  for (var i = t.length, r = n + (o ? 1 : -1); o ? r-- : ++r < i; )
-    if (e(t[r], r, t))
-      return r;
-  return -1;
-}
-function io(t) {
-  return t !== t;
-}
-function ro(t, e, n) {
-  for (var o = n - 1, i = t.length; ++o < i; )
-    if (t[o] === e)
-      return o;
-  return -1;
-}
-function so(t, e, n) {
-  return e === e ? ro(t, e, n) : oo(t, io, n);
-}
-function ao(t, e) {
-  var n = t == null ? 0 : t.length;
-  return !!n && so(t, e, 0) > -1;
-}
-var lo = 9007199254740991, ho = /^(?:0|[1-9]\d*)$/;
-function co(t, e) {
-  var n = typeof t;
-  return e = e == null ? lo : e, !!e && (n == "number" || n != "symbol" && ho.test(t)) && t > -1 && t % 1 == 0 && t < e;
-}
-function de(t, e, n) {
-  e == "__proto__" && tt ? tt(t, e, {
-    configurable: !0,
-    enumerable: !0,
-    value: n,
-    writable: !0
-  }) : t[e] = n;
-}
-function ye(t, e) {
-  return t === e || t !== t && e !== e;
-}
-var uo = Object.prototype, go = uo.hasOwnProperty;
-function me(t, e, n) {
-  var o = t[e];
-  (!(go.call(t, e) && ye(o, n)) || n === void 0 && !(e in t)) && de(t, e, n);
-}
-function q(t, e, n, o) {
-  var i = !n;
-  n || (n = {});
-  for (var r = -1, s = e.length; ++r < s; ) {
-    var l = e[r], h = o ? o(n[l], t[l], l, n, t) : void 0;
-    h === void 0 && (h = t[l]), i ? de(n, l, h) : me(n, l, h);
-  }
-  return n;
-}
-var Bt = Math.max;
-function po(t, e, n) {
-  return e = Bt(e === void 0 ? t.length - 1 : e, 0), function() {
-    for (var o = arguments, i = -1, r = Bt(o.length - e, 0), s = Array(r); ++i < r; )
-      s[i] = o[e + i];
-    i = -1;
-    for (var l = Array(e + 1); ++i < e; )
-      l[i] = o[i];
-    return l[e] = n(s), zn(t, this, l);
-  };
-}
-var fo = 9007199254740991;
-function Pe(t) {
-  return typeof t == "number" && t > -1 && t % 1 == 0 && t <= fo;
-}
-function ve(t) {
-  return t != null && Pe(t.length) && !fe(t);
-}
-var yo = Object.prototype;
-function mt(t) {
-  var e = t && t.constructor, n = typeof e == "function" && e.prototype || yo;
-  return t === n;
-}
-function mo(t, e) {
-  for (var n = -1, o = Array(t); ++n < t; )
-    o[n] = e(n);
-  return o;
-}
-var Po = "[object Arguments]";
-function Ft(t) {
-  return S(t) && O(t) == Po;
-}
-var Te = Object.prototype, vo = Te.hasOwnProperty, To = Te.propertyIsEnumerable, bo = Ft(function() {
-  return arguments;
-}()) ? Ft : function(t) {
-  return S(t) && vo.call(t, "callee") && !To.call(t, "callee");
-};
-const be = bo;
-function Mo() {
-  return !1;
-}
-var Me = typeof exports == "object" && exports && !exports.nodeType && exports, Ut = Me && typeof module == "object" && module && !module.nodeType && module, Eo = Ut && Ut.exports === Me, Kt = Eo ? C.Buffer : void 0, xo = Kt ? Kt.isBuffer : void 0, Lo = xo || Mo;
-const Ee = Lo;
-var Co = "[object Arguments]", wo = "[object Array]", Ro = "[object Boolean]", Io = "[object Date]", _o = "[object Error]", ko = "[object Function]", $o = "[object Map]", Oo = "[object Number]", So = "[object Object]", Ao = "[object RegExp]", Do = "[object Set]", jo = "[object String]", No = "[object WeakMap]", Bo = "[object ArrayBuffer]", Fo = "[object DataView]", Uo = "[object Float32Array]", Ko = "[object Float64Array]", zo = "[object Int8Array]", Go = "[object Int16Array]", Ho = "[object Int32Array]", Yo = "[object Uint8Array]", Xo = "[object Uint8ClampedArray]", Vo = "[object Uint16Array]", Wo = "[object Uint32Array]", d = {};
-d[Uo] = d[Ko] = d[zo] = d[Go] = d[Ho] = d[Yo] = d[Xo] = d[Vo] = d[Wo] = !0;
-d[Co] = d[wo] = d[Bo] = d[Ro] = d[Fo] = d[Io] = d[_o] = d[ko] = d[$o] = d[Oo] = d[So] = d[Ao] = d[Do] = d[jo] = d[No] = !1;
-function qo(t) {
-  return S(t) && Pe(t.length) && !!d[O(t)];
-}
-function Pt(t) {
-  return function(e) {
-    return t(e);
-  };
-}
-var xe = typeof exports == "object" && exports && !exports.nodeType && exports, Y = xe && typeof module == "object" && module && !module.nodeType && module, Zo = Y && Y.exports === xe, ht = Zo && ce.process, Jo = function() {
-  try {
-    var t = Y && Y.require && Y.require("util").types;
-    return t || ht && ht.binding && ht.binding("util");
-  } catch (e) {
-  }
-}();
-const K = Jo;
-var zt = K && K.isTypedArray, Qo = zt ? Pt(zt) : qo;
-const ti = Qo;
-var ei = Object.prototype, ni = ei.hasOwnProperty;
-function Le(t, e) {
-  var n = A(t), o = !n && be(t), i = !n && !o && Ee(t), r = !n && !o && !i && ti(t), s = n || o || i || r, l = s ? mo(t.length, String) : [], h = l.length;
-  for (var c in t)
-    (e || ni.call(t, c)) && !(s && // Safari 9 has enumerable `arguments.length` in strict mode.
-    (c == "length" || // Node.js 0.10 has enumerable non-index properties on buffers.
-    i && (c == "offset" || c == "parent") || // PhantomJS 2 has enumerable non-index properties on typed arrays.
-    r && (c == "buffer" || c == "byteLength" || c == "byteOffset") || // Skip index properties.
-    co(c, h))) && l.push(c);
-  return l;
-}
-function Ce(t, e) {
-  return function(n) {
-    return t(e(n));
-  };
-}
-var oi = Ce(Object.keys, Object);
-const ii = oi;
-var ri = Object.prototype, si = ri.hasOwnProperty;
-function ai(t) {
-  if (!mt(t))
-    return ii(t);
-  var e = [];
-  for (var n in Object(t))
-    si.call(t, n) && n != "constructor" && e.push(n);
-  return e;
-}
-function vt(t) {
-  return ve(t) ? Le(t) : ai(t);
-}
-function li(t) {
-  var e = [];
-  if (t != null)
-    for (var n in Object(t))
-      e.push(n);
-  return e;
-}
-var hi = Object.prototype, ci = hi.hasOwnProperty;
-function ui(t) {
-  if (!W(t))
-    return li(t);
-  var e = mt(t), n = [];
-  for (var o in t)
-    o == "constructor" && (e || !ci.call(t, o)) || n.push(o);
-  return n;
-}
-function Tt(t) {
-  return ve(t) ? Le(t, !0) : ui(t);
-}
-var gi = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/, pi = /^\w*$/;
-function fi(t, e) {
-  if (A(t))
-    return !1;
-  var n = typeof t;
-  return n == "number" || n == "symbol" || n == "boolean" || t == null || yt(t) ? !0 : pi.test(t) || !gi.test(t) || e != null && t in Object(e);
-}
-var di = j(Object, "create");
-const X = di;
-function yi() {
-  this.__data__ = X ? X(null) : {}, this.size = 0;
-}
-function mi(t) {
-  var e = this.has(t) && delete this.__data__[t];
-  return this.size -= e ? 1 : 0, e;
-}
-var Pi = "__lodash_hash_undefined__", vi = Object.prototype, Ti = vi.hasOwnProperty;
-function bi(t) {
-  var e = this.__data__;
-  if (X) {
-    var n = e[t];
-    return n === Pi ? void 0 : n;
-  }
-  return Ti.call(e, t) ? e[t] : void 0;
-}
-var Mi = Object.prototype, Ei = Mi.hasOwnProperty;
-function xi(t) {
-  var e = this.__data__;
-  return X ? e[t] !== void 0 : Ei.call(e, t);
-}
-var Li = "__lodash_hash_undefined__";
-function Ci(t, e) {
-  var n = this.__data__;
-  return this.size += this.has(t) ? 0 : 1, n[t] = X && e === void 0 ? Li : e, this;
-}
-function $(t) {
-  var e = -1, n = t == null ? 0 : t.length;
-  for (this.clear(); ++e < n; ) {
-    var o = t[e];
-    this.set(o[0], o[1]);
-  }
-}
-$.prototype.clear = yi;
-$.prototype.delete = mi;
-$.prototype.get = bi;
-$.prototype.has = xi;
-$.prototype.set = Ci;
-function wi() {
-  this.__data__ = [], this.size = 0;
-}
-function nt(t, e) {
-  for (var n = t.length; n--; )
-    if (ye(t[n][0], e))
-      return n;
-  return -1;
-}
-var Ri = Array.prototype, Ii = Ri.splice;
-function _i(t) {
-  var e = this.__data__, n = nt(e, t);
-  if (n < 0)
-    return !1;
-  var o = e.length - 1;
-  return n == o ? e.pop() : Ii.call(e, n, 1), --this.size, !0;
-}
-function ki(t) {
-  var e = this.__data__, n = nt(e, t);
-  return n < 0 ? void 0 : e[n][1];
-}
-function $i(t) {
-  return nt(this.__data__, t) > -1;
-}
-function Oi(t, e) {
-  var n = this.__data__, o = nt(n, t);
-  return o < 0 ? (++this.size, n.push([t, e])) : n[o][1] = e, this;
-}
-function R(t) {
-  var e = -1, n = t == null ? 0 : t.length;
-  for (this.clear(); ++e < n; ) {
-    var o = t[e];
-    this.set(o[0], o[1]);
-  }
-}
-R.prototype.clear = wi;
-R.prototype.delete = _i;
-R.prototype.get = ki;
-R.prototype.has = $i;
-R.prototype.set = Oi;
-var Si = j(C, "Map");
-const V = Si;
-function Ai() {
-  this.size = 0, this.__data__ = {
-    hash: new $(),
-    map: new (V || R)(),
-    string: new $()
-  };
-}
-function Di(t) {
-  var e = typeof t;
-  return e == "string" || e == "number" || e == "symbol" || e == "boolean" ? t !== "__proto__" : t === null;
-}
-function ot(t, e) {
-  var n = t.__data__;
-  return Di(e) ? n[typeof e == "string" ? "string" : "hash"] : n.map;
-}
-function ji(t) {
-  var e = ot(this, t).delete(t);
-  return this.size -= e ? 1 : 0, e;
-}
-function Ni(t) {
-  return ot(this, t).get(t);
-}
-function Bi(t) {
-  return ot(this, t).has(t);
-}
-function Fi(t, e) {
-  var n = ot(this, t), o = n.size;
-  return n.set(t, e), this.size += n.size == o ? 0 : 1, this;
-}
-function I(t) {
-  var e = -1, n = t == null ? 0 : t.length;
-  for (this.clear(); ++e < n; ) {
-    var o = t[e];
-    this.set(o[0], o[1]);
-  }
-}
-I.prototype.clear = Ai;
-I.prototype.delete = ji;
-I.prototype.get = Ni;
-I.prototype.has = Bi;
-I.prototype.set = Fi;
-var Ui = "Expected a function";
-function bt(t, e) {
-  if (typeof t != "function" || e != null && typeof e != "function")
-    throw new TypeError(Ui);
-  var n = function() {
-    var o = arguments, i = e ? e.apply(this, o) : o[0], r = n.cache;
-    if (r.has(i))
-      return r.get(i);
-    var s = t.apply(this, o);
-    return n.cache = r.set(i, s) || r, s;
-  };
-  return n.cache = new (bt.Cache || I)(), n;
-}
-bt.Cache = I;
-var Ki = 500;
-function zi(t) {
-  var e = bt(t, function(o) {
-    return n.size === Ki && n.clear(), o;
-  }), n = e.cache;
-  return e;
-}
-var Gi = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g, Hi = /\\(\\)?/g, Yi = zi(function(t) {
-  var e = [];
-  return t.charCodeAt(0) === 46 && e.push(""), t.replace(Gi, function(n, o, i, r) {
-    e.push(i ? r.replace(Hi, "$1") : o || n);
-  }), e;
-});
-const Xi = Yi;
-function Vi(t) {
-  return t == null ? "" : pe(t);
-}
-function Mt(t, e) {
-  return A(t) ? t : fi(t, e) ? [t] : Xi(Vi(t));
-}
-var Wi = 1 / 0;
-function we(t) {
-  if (typeof t == "string" || yt(t))
-    return t;
-  var e = t + "";
-  return e == "0" && 1 / t == -Wi ? "-0" : e;
-}
-function Re(t, e) {
-  e = Mt(e, t);
-  for (var n = 0, o = e.length; t != null && n < o; )
-    t = t[we(e[n++])];
-  return n && n == o ? t : void 0;
-}
-function Ie(t, e, n) {
-  var o = t == null ? void 0 : Re(t, e);
-  return o === void 0 ? n : o;
-}
-function Et(t, e) {
-  for (var n = -1, o = e.length, i = t.length; ++n < o; )
-    t[i + n] = e[n];
-  return t;
-}
-var Gt = w ? w.isConcatSpreadable : void 0;
-function qi(t) {
-  return A(t) || be(t) || !!(Gt && t && t[Gt]);
-}
-function _e(t, e, n, o, i) {
-  var r = -1, s = t.length;
-  for (n || (n = qi), i || (i = []); ++r < s; ) {
-    var l = t[r];
-    e > 0 && n(l) ? e > 1 ? _e(l, e - 1, n, o, i) : Et(i, l) : o || (i[i.length] = l);
-  }
-  return i;
-}
-function Zi(t) {
-  var e = t == null ? 0 : t.length;
-  return e ? _e(t, 1) : [];
-}
-function Ji(t) {
-  return eo(po(t, void 0, Zi), t + "");
-}
-var Qi = Ce(Object.getPrototypeOf, Object);
-const xt = Qi;
-var tr = "[object Object]", er = Function.prototype, nr = Object.prototype, ke = er.toString, or = nr.hasOwnProperty, ir = ke.call(Object);
-function rr(t) {
-  if (!S(t) || O(t) != tr)
-    return !1;
-  var e = xt(t);
-  if (e === null)
-    return !0;
-  var n = or.call(e, "constructor") && e.constructor;
-  return typeof n == "function" && n instanceof n && ke.call(n) == ir;
-}
-function sr(t, e, n) {
-  var o = -1, i = t.length;
-  e < 0 && (e = -e > i ? 0 : i + e), n = n > i ? i : n, n < 0 && (n += i), i = e > n ? 0 : n - e >>> 0, e >>>= 0;
-  for (var r = Array(i); ++o < i; )
-    r[o] = t[o + e];
-  return r;
-}
-function ar() {
-  this.__data__ = new R(), this.size = 0;
-}
-function lr(t) {
-  var e = this.__data__, n = e.delete(t);
-  return this.size = e.size, n;
-}
-function hr(t) {
-  return this.__data__.get(t);
-}
-function cr(t) {
-  return this.__data__.has(t);
-}
-var ur = 200;
-function gr(t, e) {
-  var n = this.__data__;
-  if (n instanceof R) {
-    var o = n.__data__;
-    if (!V || o.length < ur - 1)
-      return o.push([t, e]), this.size = ++n.size, this;
-    n = this.__data__ = new I(o);
-  }
-  return n.set(t, e), this.size = n.size, this;
-}
-function z(t) {
-  var e = this.__data__ = new R(t);
-  this.size = e.size;
-}
-z.prototype.clear = ar;
-z.prototype.delete = lr;
-z.prototype.get = hr;
-z.prototype.has = cr;
-z.prototype.set = gr;
-function pr(t, e) {
-  return t && q(e, vt(e), t);
-}
-function fr(t, e) {
-  return t && q(e, Tt(e), t);
-}
-var $e = typeof exports == "object" && exports && !exports.nodeType && exports, Ht = $e && typeof module == "object" && module && !module.nodeType && module, dr = Ht && Ht.exports === $e, Yt = dr ? C.Buffer : void 0, Xt = Yt ? Yt.allocUnsafe : void 0;
-function yr(t, e) {
-  if (e)
-    return t.slice();
-  var n = t.length, o = Xt ? Xt(n) : new t.constructor(n);
-  return t.copy(o), o;
-}
-function mr(t, e) {
-  for (var n = -1, o = t == null ? 0 : t.length, i = 0, r = []; ++n < o; ) {
-    var s = t[n];
-    e(s, n, t) && (r[i++] = s);
-  }
-  return r;
-}
-function Oe() {
-  return [];
-}
-var Pr = Object.prototype, vr = Pr.propertyIsEnumerable, Vt = Object.getOwnPropertySymbols, Tr = Vt ? function(t) {
-  return t == null ? [] : (t = Object(t), mr(Vt(t), function(e) {
-    return vr.call(t, e);
-  }));
-} : Oe;
-const Lt = Tr;
-function br(t, e) {
-  return q(t, Lt(t), e);
-}
-var Mr = Object.getOwnPropertySymbols, Er = Mr ? function(t) {
-  for (var e = []; t; )
-    Et(e, Lt(t)), t = xt(t);
-  return e;
-} : Oe;
-const Se = Er;
-function xr(t, e) {
-  return q(t, Se(t), e);
-}
-function Ae(t, e, n) {
-  var o = e(t);
-  return A(t) ? o : Et(o, n(t));
-}
-function Lr(t) {
-  return Ae(t, vt, Lt);
-}
-function De(t) {
-  return Ae(t, Tt, Se);
-}
-var Cr = j(C, "DataView");
-const gt = Cr;
-var wr = j(C, "Promise");
-const pt = wr;
-var Rr = j(C, "Set");
-const F = Rr;
-var Wt = "[object Map]", Ir = "[object Object]", qt = "[object Promise]", Zt = "[object Set]", Jt = "[object WeakMap]", Qt = "[object DataView]", _r = D(gt), kr = D(V), $r = D(pt), Or = D(F), Sr = D(ut), k = O;
-(gt && k(new gt(new ArrayBuffer(1))) != Qt || V && k(new V()) != Wt || pt && k(pt.resolve()) != qt || F && k(new F()) != Zt || ut && k(new ut()) != Jt) && (k = function(t) {
-  var e = O(t), n = e == Ir ? t.constructor : void 0, o = n ? D(n) : "";
-  if (o)
-    switch (o) {
-      case _r:
-        return Qt;
-      case kr:
-        return Wt;
-      case $r:
-        return qt;
-      case Or:
-        return Zt;
-      case Sr:
-        return Jt;
-    }
-  return e;
-});
-const Ct = k;
-var Ar = Object.prototype, Dr = Ar.hasOwnProperty;
-function jr(t) {
-  var e = t.length, n = new t.constructor(e);
-  return e && typeof t[0] == "string" && Dr.call(t, "index") && (n.index = t.index, n.input = t.input), n;
-}
-var Nr = C.Uint8Array;
-const te = Nr;
-function wt(t) {
-  var e = new t.constructor(t.byteLength);
-  return new te(e).set(new te(t)), e;
-}
-function Br(t, e) {
-  var n = e ? wt(t.buffer) : t.buffer;
-  return new t.constructor(n, t.byteOffset, t.byteLength);
-}
-var Fr = /\w*$/;
-function Ur(t) {
-  var e = new t.constructor(t.source, Fr.exec(t));
-  return e.lastIndex = t.lastIndex, e;
-}
-var ee = w ? w.prototype : void 0, ne = ee ? ee.valueOf : void 0;
-function Kr(t) {
-  return ne ? Object(ne.call(t)) : {};
-}
-function zr(t, e) {
-  var n = e ? wt(t.buffer) : t.buffer;
-  return new t.constructor(n, t.byteOffset, t.length);
-}
-var Gr = "[object Boolean]", Hr = "[object Date]", Yr = "[object Map]", Xr = "[object Number]", Vr = "[object RegExp]", Wr = "[object Set]", qr = "[object String]", Zr = "[object Symbol]", Jr = "[object ArrayBuffer]", Qr = "[object DataView]", ts = "[object Float32Array]", es = "[object Float64Array]", ns = "[object Int8Array]", os = "[object Int16Array]", is = "[object Int32Array]", rs = "[object Uint8Array]", ss = "[object Uint8ClampedArray]", as = "[object Uint16Array]", ls = "[object Uint32Array]";
-function hs(t, e, n) {
-  var o = t.constructor;
-  switch (e) {
-    case Jr:
-      return wt(t);
-    case Gr:
-    case Hr:
-      return new o(+t);
-    case Qr:
-      return Br(t, n);
-    case ts:
-    case es:
-    case ns:
-    case os:
-    case is:
-    case rs:
-    case ss:
-    case as:
-    case ls:
-      return zr(t, n);
-    case Yr:
-      return new o();
-    case Xr:
-    case qr:
-      return new o(t);
-    case Vr:
-      return Ur(t);
-    case Wr:
-      return new o();
-    case Zr:
-      return Kr(t);
-  }
-}
-function cs(t) {
-  return typeof t.constructor == "function" && !mt(t) ? Kn(xt(t)) : {};
-}
-var us = "[object Map]";
-function gs(t) {
-  return S(t) && Ct(t) == us;
-}
-var oe = K && K.isMap, ps = oe ? Pt(oe) : gs;
-const fs = ps;
-var ds = "[object Set]";
-function ys(t) {
-  return S(t) && Ct(t) == ds;
-}
-var ie = K && K.isSet, ms = ie ? Pt(ie) : ys;
-const Ps = ms;
-var vs = 1, Ts = 2, bs = 4, je = "[object Arguments]", Ms = "[object Array]", Es = "[object Boolean]", xs = "[object Date]", Ls = "[object Error]", Ne = "[object Function]", Cs = "[object GeneratorFunction]", ws = "[object Map]", Rs = "[object Number]", Be = "[object Object]", Is = "[object RegExp]", _s = "[object Set]", ks = "[object String]", $s = "[object Symbol]", Os = "[object WeakMap]", Ss = "[object ArrayBuffer]", As = "[object DataView]", Ds = "[object Float32Array]", js = "[object Float64Array]", Ns = "[object Int8Array]", Bs = "[object Int16Array]", Fs = "[object Int32Array]", Us = "[object Uint8Array]", Ks = "[object Uint8ClampedArray]", zs = "[object Uint16Array]", Gs = "[object Uint32Array]", f = {};
-f[je] = f[Ms] = f[Ss] = f[As] = f[Es] = f[xs] = f[Ds] = f[js] = f[Ns] = f[Bs] = f[Fs] = f[ws] = f[Rs] = f[Be] = f[Is] = f[_s] = f[ks] = f[$s] = f[Us] = f[Ks] = f[zs] = f[Gs] = !0;
-f[Ls] = f[Ne] = f[Os] = !1;
-function J(t, e, n, o, i, r) {
-  var s, l = e & vs, h = e & Ts, c = e & bs;
-  if (n && (s = i ? n(t, o, i, r) : n(t)), s !== void 0)
-    return s;
-  if (!W(t))
-    return t;
-  var u = A(t);
-  if (u) {
-    if (s = jr(t), !l)
-      return Hn(t, s);
-  } else {
-    var g = Ct(t), y = g == Ne || g == Cs;
-    if (Ee(t))
-      return yr(t, l);
-    if (g == Be || g == je || y && !i) {
-      if (s = h || y ? {} : cs(t), !l)
-        return h ? xr(t, fr(s, t)) : br(t, pr(s, t));
-    } else {
-      if (!f[g])
-        return i ? t : {};
-      s = hs(t, g, l);
-    }
-  }
-  r || (r = new z());
-  var v = r.get(t);
-  if (v)
-    return v;
-  r.set(t, s), Ps(t) ? t.forEach(function(P) {
-    s.add(J(P, e, n, P, t, r));
-  }) : fs(t) && t.forEach(function(P, M) {
-    s.set(M, J(P, e, n, M, t, r));
-  });
-  var m = c ? h ? De : Lr : h ? Tt : vt, T = u ? void 0 : m(t);
-  return no(T || t, function(P, M) {
-    T && (M = P, P = t[M]), me(s, M, J(P, e, n, M, t, r));
-  }), s;
-}
-var Hs = "__lodash_hash_undefined__";
-function Ys(t) {
-  return this.__data__.set(t, Hs), this;
-}
-function Xs(t) {
-  return this.__data__.has(t);
-}
-function et(t) {
-  var e = -1, n = t == null ? 0 : t.length;
-  for (this.__data__ = new I(); ++e < n; )
-    this.add(t[e]);
-}
-et.prototype.add = et.prototype.push = Ys;
-et.prototype.has = Xs;
-function Vs(t, e) {
-  return t.has(e);
-}
-function Fe(t) {
-  var e = -1, n = Array(t.size);
-  return t.forEach(function(o) {
-    n[++e] = o;
-  }), n;
-}
-function Ws(t, e, n) {
-  for (var o = -1, i = t == null ? 0 : t.length; ++o < i; )
-    if (n(e, t[o]))
-      return !0;
-  return !1;
-}
-function qs(t) {
-  var e = t == null ? 0 : t.length;
-  return e ? t[e - 1] : void 0;
-}
-function Zs(t, e) {
-  return e.length < 2 ? t : Re(t, sr(e, 0, -1));
-}
-var Js = C.isFinite;
-function x(t) {
-  return typeof t == "number" && Js(t);
-}
-function Qs(t, e) {
-  return e = Mt(e, t), t = Zs(t, e), t == null || delete t[we(qs(e))];
-}
-function ta(t) {
-  return rr(t) ? void 0 : t;
-}
-var ea = 1, na = 2, oa = 4, ia = Ji(function(t, e) {
-  var n = {};
-  if (t == null)
-    return n;
-  var o = !1;
-  e = ge(e, function(r) {
-    return r = Mt(r, t), o || (o = r.length > 1), r;
-  }), q(t, De(t), n), o && (n = J(n, ea | na | oa, ta));
-  for (var i = e.length; i--; )
-    Qs(n, e[i]);
-  return n;
-});
-const ra = ia;
-var sa = 1 / 0, aa = F && 1 / Fe(new F([, -0]))[1] == sa ? function(t) {
-  return new F(t);
-} : Gn;
-const la = aa;
-var ha = 200;
-function ca(t, e, n) {
-  var o = -1, i = ao, r = t.length, s = !0, l = [], h = l;
-  if (n)
-    s = !1, i = Ws;
-  else if (r >= ha) {
-    var c = e ? null : la(t);
-    if (c)
-      return Fe(c);
-    s = !1, i = Vs, h = new et();
-  } else
-    h = e ? [] : l;
-  t:
-    for (; ++o < r; ) {
-      var u = t[o], g = e ? e(u) : u;
-      if (u = n || u !== 0 ? u : 0, s && g === g) {
-        for (var y = h.length; y--; )
-          if (h[y] === g)
-            continue t;
-        e && h.push(g), l.push(u);
-      } else
-        i(h, g, n) || (h !== l && h.push(g), l.push(u));
-    }
-  return l;
-}
-function ua(t) {
-  return t && t.length ? ca(t) : [];
-}
-const re = {
+const X = {
   radius: 6,
   zIndex: 0,
   strokeOpacity: 0,
   fillOpacity: 0
 };
-class ft {
+class _ {
   constructor(e) {
-    a(this, "map");
-    a(this, "options", b({}, re));
-    a(this, "circleMarkers", []);
+    r(this, "map");
+    r(this, "options", m({}, X));
+    r(this, "circleMarkers", []);
     this.map = e;
   }
   setOptions(e) {
-    return this.options = b(b({}, e), ra(re, "radius")), this;
+    return this.options = m(m({}, e), mt(X, "radius")), this;
   }
   createCircleMarkersByPaths(e) {
-    this.removeFromTheMap(), this.reset(), e.forEach((n) => {
-      this.circleMarkers.push(this.createCircleMarker(n));
+    this.removeFromTheMap(), this.reset(), e.forEach((t) => {
+      this.circleMarkers.push(this.createCircleMarker(t));
     }), this.addToMap();
   }
   createCircleMarker(e) {
-    return new AMap.CircleMarker(b({ center: e }, this.options));
+    return new AMap.CircleMarker(m({ center: e }, this.options));
   }
   addToMap() {
     this.map.add(this.circleMarkers);
@@ -1047,8 +185,8 @@ class ft {
    * @returns
    */
   getPointInCircleMarkers(e) {
-    var n;
-    return (n = this.circleMarkers.find((o) => this.isPointInCircle(e, o))) != null ? n : null;
+    var t;
+    return (t = this.circleMarkers.find((i) => this.isPointInCircle(e, i))) != null ? t : null;
   }
   /**
    * 获取点是否在围栏编辑器的蓝色操作点上（即中间点）
@@ -1056,11 +194,11 @@ class ft {
    * @returns
    */
   getInCircleMarkersPoint(e) {
-    const n = this.circleMarkers.find((i) => this.isPointInCircle(e, i));
-    return this.circleMarkers.findIndex((i) => i === n) % 2 === 0 ? null : n != null ? n : null;
+    const t = this.circleMarkers.find((o) => this.isPointInCircle(e, o));
+    return this.circleMarkers.findIndex((o) => o === t) % 2 === 0 ? null : t != null ? t : null;
   }
-  isPointInCircle(e, n) {
-    return n.contains(e);
+  isPointInCircle(e, t) {
+    return t.contains(e);
   }
   reset() {
     this.circleMarkers = [];
@@ -1069,27 +207,27 @@ class ft {
     this.removeFromTheMap(), this.reset();
   }
 }
-const se = {
+const q = {
   zIndex: 1,
   strokeColor: "#00D3FC",
   strokeWeight: 8,
   strokeOpacity: 0
 };
-class Ue {
+class V {
   constructor(e) {
-    a(this, "map");
-    a(this, "linesPath", []);
-    a(this, "lines", []);
+    r(this, "map");
+    r(this, "linesPath", []);
+    r(this, "lines", []);
     if (!e)
       throw new Error("map not found");
     this.map = e;
   }
   getLinesByPaths(e) {
-    let n = 0;
-    const o = e.length;
-    for (; n < o; ) {
-      const i = n + 1 >= o ? 0 : n + 1;
-      this.linesPath.push([e[n], e[i]]), n++;
+    let t = 0;
+    const i = e.length;
+    for (; t < i; ) {
+      const o = t + 1 >= i ? 0 : t + 1;
+      this.linesPath.push([e[t], e[o]]), t++;
     }
     return this.linesPath;
   }
@@ -1097,7 +235,7 @@ class Ue {
     this.reset(), this.getLinesByPaths(e);
   }
   createPolyLine(e) {
-    return new AMap.Polyline(b({ path: e }, se));
+    return new AMap.Polyline(m({ path: e }, q));
   }
   addToMap() {
     this.map.add(this.lines);
@@ -1106,124 +244,124 @@ class Ue {
     this.map.remove(this.lines);
   }
   getPointInPolyline(e) {
-    const n = this.map.getResolution(), o = se.strokeWeight * n;
+    const t = this.map.getResolution(), i = q.strokeWeight * t;
     return this.linesPath.find(
-      (r) => AMap.GeometryUtil.isPointOnSegment(e, r[0], r[1], o)
+      (s) => AMap.GeometryUtil.isPointOnSegment(e, s[0], s[1], i)
     );
   }
   reset() {
     this.linesPath = [], this.lines = [];
   }
 }
-class ga {
-  constructor(e, n) {
-    a(this, "map");
+class yt {
+  constructor(e, t) {
+    r(this, "map");
     // 实点
-    a(this, "circleMarkers", null);
+    r(this, "circleMarkers", null);
     // 中间点
-    a(this, "midCircleMarkers", null);
+    r(this, "midCircleMarkers", null);
     // 线集合
-    a(this, "lines", null);
+    r(this, "lines", null);
     // 编辑器
-    a(this, "polygonEditor", null);
+    r(this, "polygonEditor", null);
     // 多边形路径
-    a(this, "polygonPaths", []);
+    r(this, "polygonPaths", []);
     // 多边形全部路径（包括中间虚电）
-    a(this, "polygonTotalPaths", []);
+    r(this, "polygonTotalPaths", []);
     // 多边形
-    a(this, "polygon", null);
+    r(this, "polygon", null);
     // 开始点位到鼠标位置的文本
-    a(this, "startPointToCursorText", null);
+    r(this, "startPointToCursorText", null);
     // 最后一次点位到鼠标位置的文本
-    a(this, "lastPointToCursorText", null);
+    r(this, "lastPointToCursorText", null);
     // 线长的文本呢
-    a(this, "lineLengthText", null);
+    r(this, "lineLengthText", null);
     // 操作点
-    a(this, "circleMarker", null);
+    r(this, "circleMarker", null);
     // 操作中间点
-    a(this, "midCircleMarker", null);
+    r(this, "midCircleMarker", null);
     // 起始点位
-    a(this, "startPosition", null);
+    r(this, "startPosition", null);
     // 上次点击点位
-    a(this, "lastPosition", null);
+    r(this, "lastPosition", null);
     // 兜底设置编辑中间点标记列表路径
-    a(this, "editingMidTipMarkerListPath", null);
-    a(this, "onPolygonEditorAdjust", ({ target: e }) => {
+    r(this, "editingMidTipMarkerListPath", null);
+    r(this, "onPolygonEditorAdjust", ({ target: e }) => {
       this.polygonPaths = e.getPath(), this.circleMarkers.createCircleMarkersByPaths(this.polygonPaths), this.lines.createLinesByPaths(this.polygonPaths), Promise.resolve().then(() => {
         this.polygonTotalPaths = this.getPolygonEditorTargetTotalPaths(), this.midCircleMarkers.createCircleMarkersByPaths(this.polygonTotalPaths);
       }), this.reset();
     });
-    a(this, "onMouseDown", (e) => {
-      const n = e.lnglat;
-      this.circleMarker = this.circleMarkers.getPointInCircleMarkers(n), this.midCircleMarker = this.midCircleMarkers.getInCircleMarkersPoint(n);
+    r(this, "onMouseDown", (e) => {
+      const t = e.lnglat;
+      this.circleMarker = this.circleMarkers.getPointInCircleMarkers(t), this.midCircleMarker = this.midCircleMarkers.getInCircleMarkersPoint(t);
     });
-    a(this, "onMovePolygonEditorPoint", (e) => {
+    r(this, "onMovePolygonEditorPoint", (e) => {
       if (this.midCircleMarker)
         return;
       if (!this.circleMarker) {
         this.reset();
         return;
       }
-      const n = this.circleMarker.getCenter(), o = (u) => `${u.lng}-${u.lat}`;
-      let i = this.polygonPaths.findIndex((u) => o(u) === o(n));
-      if (i === -1)
+      const t = this.circleMarker.getCenter(), i = (g) => `${g.lng}-${g.lat}`;
+      let o = this.polygonPaths.findIndex((g) => i(g) === i(t));
+      if (o === -1)
         return;
-      const r = this.polygonPaths.length, s = i - 1 <= -1 ? r - 1 : i - 1, l = i + 1 >= r ? 0 : i + 1, h = this.polygonPaths.at(s), c = this.polygonPaths.at(l);
-      this.setPosition(h, c), this.onMouseMoveInDrawPolygon(e);
+      const s = this.polygonPaths.length, a = o - 1 <= -1 ? s - 1 : o - 1, h = o + 1 >= s ? 0 : o + 1, c = this.polygonPaths.at(a), l = this.polygonPaths.at(h);
+      this.setPosition(c, l), this.onMouseMoveInDrawPolygon(e);
     });
-    a(this, "onMovePolygonEditorMidPoint", (e) => {
+    r(this, "onMovePolygonEditorMidPoint", (e) => {
       if (this.circleMarker)
         return;
       if (!this.midCircleMarker) {
         this.reset();
         return;
       }
-      const n = this.midCircleMarker.getCenter(), o = (u) => `${u.lng}-${u.lat}`;
-      let i = this.polygonTotalPaths.findIndex((u) => o(u) === o(n));
-      if (i === -1)
+      const t = this.midCircleMarker.getCenter(), i = (g) => `${g.lng}-${g.lat}`;
+      let o = this.polygonTotalPaths.findIndex((g) => i(g) === i(t));
+      if (o === -1)
         return;
-      const r = this.polygonTotalPaths.length, s = i - 1 <= -1 ? r - 1 : i - 1, l = i + 1 >= r ? 0 : i + 1, h = this.polygonTotalPaths.at(s), c = this.polygonTotalPaths.at(l);
-      this.setPosition(h, c), this.onMouseMoveInDrawPolygon(e);
+      const s = this.polygonTotalPaths.length, a = o - 1 <= -1 ? s - 1 : o - 1, h = o + 1 >= s ? 0 : o + 1, c = this.polygonTotalPaths.at(a), l = this.polygonTotalPaths.at(h);
+      this.setPosition(c, l), this.onMouseMoveInDrawPolygon(e);
     });
-    a(this, "onMouseUp", () => {
+    r(this, "onMouseUp", () => {
       this.circleMarker = null, this.midCircleMarker = null, this.reset();
     });
-    a(this, "onInPolygonEditorLine", (e) => {
+    r(this, "onInPolygonEditorLine", (e) => {
       if (this.circleMarker)
         return this.removeLineDistanceText();
-      const n = e.lnglat, o = this.lines.getPointInPolyline(n);
-      if (!o)
+      const t = e.lnglat, i = this.lines.getPointInPolyline(t);
+      if (!i)
         return this.removeLineDistanceText();
-      const [i, r] = o;
-      this.lineLengthText || (this.lineLengthText = N(), this.lineLengthText.add(this.map)), this.updateDistanceText(this.lineLengthText, B(i, r));
+      const [o, s] = i;
+      this.lineLengthText || (this.lineLengthText = L(), this.lineLengthText.add(this.map)), this.updateDistanceText(this.lineLengthText, k(o, s));
     });
     /**
      * 获取新增围栏时，鼠标移动位置
      * @param {*} event
      */
-    a(this, "onMouseMoveInDrawPolygon", (e) => {
+    r(this, "onMouseMoveInDrawPolygon", (e) => {
       if (!this.startPosition || !this.lastPosition)
         return;
-      const n = e.lnglat;
+      const t = e.lnglat;
       this.updateDistanceText(
         this.startPointToCursorText,
-        B(this.startPosition, n)
+        k(this.startPosition, t)
       ), this.updateDistanceText(
         this.lastPointToCursorText,
-        B(this.lastPosition, n)
+        k(this.lastPosition, t)
       );
     });
     if (!e)
       throw new Error("map not found!");
-    this.map = e, n && (this.polygonEditor = n), this.circleMarkers = new ft(this.map), this.midCircleMarkers = new ft(this.map), this.lines = new Ue(this.map);
+    this.map = e, t && (this.polygonEditor = t), this.circleMarkers = new _(this.map), this.midCircleMarkers = new _(this.map), this.lines = new V(this.map);
   }
   /**
    * 获取编辑器目标多边形路径
    * @returns
    */
   getPolygonEditorTargetPaths() {
-    var e, n, o;
-    return this.polygonEditor ? (o = (n = (e = this.polygonEditor) == null ? void 0 : e.getTarget) == null ? void 0 : n.call(e).getPath()) != null ? o : [] : [];
+    var e, t, i;
+    return this.polygonEditor ? (i = (t = (e = this.polygonEditor) == null ? void 0 : e.getTarget) == null ? void 0 : t.call(e).getPath()) != null ? i : [] : [];
   }
   /**
    *
@@ -1236,30 +374,30 @@ class ga {
    * @returns
    */
   getEditingMidTipMarkerList() {
-    var n, o;
+    var t, i;
     const { singleRingListHandle: e } = this.polygonEditor;
     if (this.editingMidTipMarkerListPath) {
       if (typeof this.editingMidTipMarkerListPath == "function")
         return this.editingMidTipMarkerListPath(this.polygonEditor);
       if (typeof this.editingMidTipMarkerListPath == "string")
-        return Ie(this.polygonEditor, this.editingMidTipMarkerListPath);
+        return G(this.polygonEditor, this.editingMidTipMarkerListPath);
     }
-    return (n = this.polygonEditor.editingMidTipMarkerList) != null && n.length ? this.polygonEditor.editingMidTipMarkerList : e ? (o = e == null ? void 0 : e.list) == null ? void 0 : o.editingMidTipMarkerList : [];
+    return (t = this.polygonEditor.editingMidTipMarkerList) != null && t.length ? this.polygonEditor.editingMidTipMarkerList : e ? (i = e == null ? void 0 : e.list) == null ? void 0 : i.editingMidTipMarkerList : [];
   }
   /**
    * 获取编辑围栏所有点位（白色操作点+蓝色中间操作点）
    * @returns
    */
   getPolygonEditorTargetTotalPaths() {
-    const e = this.getPolygonEditorTargetPaths(), n = this.getEditingMidTipMarkerList();
-    let o = 0;
-    const i = [], r = e.length;
-    for (; o < r; ) {
-      i.push(e[o]);
-      const s = n[o];
-      s && i.push(s.getCenter()), o++;
+    const e = this.getPolygonEditorTargetPaths(), t = this.getEditingMidTipMarkerList();
+    let i = 0;
+    const o = [], s = e.length;
+    for (; i < s; ) {
+      o.push(e[i]);
+      const a = t[i];
+      a && o.push(a.getCenter()), i++;
     }
-    return i;
+    return o;
   }
   /**
    * 注册多边形编辑器，可操作点位事件
@@ -1273,12 +411,12 @@ class ga {
    * @param polygonEditor
    */
   start(e) {
-    var i, r, s;
+    var o, s, a;
     if (!e && !this.polygonEditor)
       throw new Error("polygonEditor not found");
     this.polygonEditor = e;
-    const { controlPoint: n, midControlPoint: o } = this.polygonEditor;
-    return this.polygonPaths = this.getPolygonEditorTargetPaths(), this.circleMarkers.setOptions(n).createCircleMarkersByPaths(this.polygonPaths), this.polygonTotalPaths = this.getPolygonEditorTargetTotalPaths(), this.midCircleMarkers.setOptions(o).createCircleMarkersByPaths(this.polygonTotalPaths), this.lines.createLinesByPaths(this.polygonPaths), (i = this.polygonEditor) == null || i.on("adjust", this.onPolygonEditorAdjust), (r = this.polygonEditor) == null || r.on("removenode", this.onPolygonEditorAdjust), (s = this.polygonEditor) == null || s.on("addnode", this.onPolygonEditorAdjust), this.map.on("mousedown", this.onMouseDown), this.map.on("touchstart", this.onMouseDown), this.map.on("mousemove", this.onMovePolygonEditorPoint), this.map.on("touchmove", this.onMovePolygonEditorPoint), this.map.on("mousemove", this.onMovePolygonEditorMidPoint), this.map.on("touchmove", this.onMovePolygonEditorMidPoint), this.map.on("mousemove", this.onInPolygonEditorLine), this.map.on("touchmove", this.onInPolygonEditorLine), this.map.on("mouseup", this.onMouseUp), this.map.on("touchend", this.onMouseUp), this;
+    const { controlPoint: t, midControlPoint: i } = this.polygonEditor;
+    return this.polygonPaths = this.getPolygonEditorTargetPaths(), this.circleMarkers.setOptions(t).createCircleMarkersByPaths(this.polygonPaths), this.polygonTotalPaths = this.getPolygonEditorTargetTotalPaths(), this.midCircleMarkers.setOptions(i).createCircleMarkersByPaths(this.polygonTotalPaths), this.lines.createLinesByPaths(this.polygonPaths), (o = this.polygonEditor) == null || o.on("adjust", this.onPolygonEditorAdjust), (s = this.polygonEditor) == null || s.on("removenode", this.onPolygonEditorAdjust), (a = this.polygonEditor) == null || a.on("addnode", this.onPolygonEditorAdjust), this.map.on("mousedown", this.onMouseDown), this.map.on("touchstart", this.onMouseDown), this.map.on("mousemove", this.onMovePolygonEditorPoint), this.map.on("touchmove", this.onMovePolygonEditorPoint), this.map.on("mousemove", this.onMovePolygonEditorMidPoint), this.map.on("touchmove", this.onMovePolygonEditorMidPoint), this.map.on("mousemove", this.onInPolygonEditorLine), this.map.on("touchmove", this.onInPolygonEditorLine), this.map.on("mouseup", this.onMouseUp), this.map.on("touchend", this.onMouseUp), this;
   }
   /**
    * 移除多边形编辑器，可操作点位事件
@@ -1290,8 +428,8 @@ class ga {
    * 移除多边形编辑器，可操作点位事件
    */
   stop() {
-    var e, n, o;
-    (e = this.polygonEditor) == null || e.off("adjust", this.onPolygonEditorAdjust), (n = this.polygonEditor) == null || n.off("removenode", this.onPolygonEditorAdjust), (o = this.polygonEditor) == null || o.off("addnode", this.onPolygonEditorAdjust), this.map.off("mousedown", this.onMouseDown), this.map.off("touchstart", this.onMouseDown), this.map.off("mousemove", this.onMovePolygonEditorPoint), this.map.off("touchmove", this.onMovePolygonEditorPoint), this.map.off("mousemove", this.onMovePolygonEditorMidPoint), this.map.off("touchmove", this.onMovePolygonEditorMidPoint), this.map.off("mousemove", this.onInPolygonEditorLine), this.map.off("touchmove", this.onInPolygonEditorLine), this.map.off("mouseup", this.onMouseUp), this.map.off("touchend", this.onMouseUp);
+    var e, t, i;
+    (e = this.polygonEditor) == null || e.off("adjust", this.onPolygonEditorAdjust), (t = this.polygonEditor) == null || t.off("removenode", this.onPolygonEditorAdjust), (i = this.polygonEditor) == null || i.off("addnode", this.onPolygonEditorAdjust), this.map.off("mousedown", this.onMouseDown), this.map.off("touchstart", this.onMouseDown), this.map.off("mousemove", this.onMovePolygonEditorPoint), this.map.off("touchmove", this.onMovePolygonEditorPoint), this.map.off("mousemove", this.onMovePolygonEditorMidPoint), this.map.off("touchmove", this.onMovePolygonEditorMidPoint), this.map.off("mousemove", this.onInPolygonEditorLine), this.map.off("touchmove", this.onInPolygonEditorLine), this.map.off("mouseup", this.onMouseUp), this.map.off("touchend", this.onMouseUp);
   }
   /**
    * 开始边线测距
@@ -1311,26 +449,26 @@ class ga {
    * @param {object} startPosition
    * @param {object} lastPosition
    */
-  setPosition(e, n) {
-    this.startPosition = e, this.lastPosition = n, this.createDistanceText();
+  setPosition(e, t) {
+    this.startPosition = e, this.lastPosition = t, this.createDistanceText();
   }
   /**
    * 创建距离文本
    * @returns
    */
   createDistanceText() {
-    this.startPointToCursorText && this.lastPointToCursorText || (this.startPointToCursorText = N(), this.lastPointToCursorText = N(), this.startPointToCursorText.setMap(this.map), this.lastPointToCursorText.setMap(this.map));
+    this.startPointToCursorText && this.lastPointToCursorText || (this.startPointToCursorText = L(), this.lastPointToCursorText = L(), this.startPointToCursorText.setMap(this.map), this.lastPointToCursorText.setMap(this.map));
   }
-  updateDistanceText(e, { text: n, textPos: o }) {
-    e.setText(n), e.setPosition(o);
+  updateDistanceText(e, { text: t, textPos: i }) {
+    e.setText(t), e.setPosition(i);
   }
   removeLineDistanceText() {
     var e;
     (e = this.lineLengthText) == null || e.remove(), this.lineLengthText = null;
   }
   removeDistanceText() {
-    var e, n;
-    (e = this.startPointToCursorText) == null || e.remove(), (n = this.lastPointToCursorText) == null || n.remove(), this.startPointToCursorText = null, this.lastPointToCursorText = null;
+    var e, t;
+    (e = this.startPointToCursorText) == null || e.remove(), (t = this.lastPointToCursorText) == null || t.remove(), this.startPointToCursorText = null, this.lastPointToCursorText = null;
   }
   reset() {
     return this.startPosition = null, this.lastPosition = null, this.removeDistanceText(), this.removeLineDistanceText(), this;
@@ -1342,29 +480,29 @@ class ga {
     return this.polygon = null, this.startPosition = null, this.lastPosition = null, this.removeLineDistanceText(), this.stopLineRanging(), this;
   }
 }
-class pa {
-  constructor(e, n) {
-    a(this, "opts");
-    a(this, "map");
+class Pt {
+  constructor(e, t) {
+    r(this, "opts");
+    r(this, "map");
     // 线集合
-    a(this, "lines", null);
+    r(this, "lines", null);
     // 多边形
-    a(this, "polygon", null);
+    r(this, "polygon", null);
     // 线长的文本呢
-    a(this, "lineLengthText", null);
+    r(this, "lineLengthText", null);
     // 兜底设置编辑中间点标记列表路径
-    a(this, "editingMidTipMarkerListPath", null);
-    a(this, "onPolygonRanging", (e) => {
-      const n = e.lnglat, o = this.lines.getPointInPolyline(n);
-      if (!o)
+    r(this, "editingMidTipMarkerListPath", null);
+    r(this, "onPolygonRanging", (e) => {
+      const t = e.lnglat, i = this.lines.getPointInPolyline(t);
+      if (!i)
         return this.removeLineDistanceText();
-      const [i, r] = o;
-      this.lineLengthText || (this.lineLengthText = N(), this.lineLengthText.add(this.map)), this.updateDistanceText(this.lineLengthText, B(i, r));
+      const [o, s] = i;
+      this.lineLengthText || (this.lineLengthText = L(), this.lineLengthText.add(this.map)), this.updateDistanceText(this.lineLengthText, k(o, s));
     });
     /**
     * 拖拽结束后，需要重新计算一下点位数据
     */
-    a(this, "onRotateEndEnd", () => _(this, null, function* () {
+    r(this, "onRotateEndEnd", () => x(this, null, function* () {
       yield Promise.resolve();
       const e = this.polygon;
       this.onDragEnd({ target: e });
@@ -1372,22 +510,22 @@ class pa {
     /**
      * 拖拽结束后，需要重新计算一下点位数据
      */
-    a(this, "onDragEnd", (e) => _(this, null, function* () {
-      var o;
-      const n = e.target;
-      (o = this.lines) == null || o.reset(), yield Promise.resolve(), this.lines.createLinesByPaths(n.getPath());
+    r(this, "onDragEnd", (e) => x(this, null, function* () {
+      var i;
+      const t = e.target;
+      (i = this.lines) == null || i.reset(), yield Promise.resolve(), this.lines.createLinesByPaths(t.getPath());
     }));
     if (!e)
       throw new Error("map not found!");
-    this.opts = n, this.map = e, this.lines = new Ue(this.map), this.immediateActive();
+    this.opts = t, this.map = e, this.lines = new V(this.map), this.immediateActive();
   }
   get immediate() {
     var e;
     return (e = this.opts) == null ? void 0 : e.immediate;
   }
   get draggable() {
-    var n;
-    return ((n = this.polygon) == null ? void 0 : n.getOptions()).draggable;
+    var t;
+    return ((t = this.polygon) == null ? void 0 : t.getOptions()).draggable;
   }
   get rotatable() {
     var e;
@@ -1397,8 +535,8 @@ class pa {
    * 立刻激活
    */
   immediateActive() {
-    var n;
-    const e = (n = this.opts) == null ? void 0 : n.target;
+    var t;
+    const e = (t = this.opts) == null ? void 0 : t.target;
     this.immediate && e.CLASS_NAME === "Overlay.Polygon" && this.open(e);
   }
   /**
@@ -1423,8 +561,8 @@ class pa {
     this.polygon && (this.draggable && this.polygon.on("dragend", this.onDragEnd), this.rotatable && "likeRectangle" in this.polygon && this.polygon.on("rotateEnd", this.onRotateEndEnd));
   }
   destroyPolygonEvents() {
-    var e, n, o, i;
-    this.polygon && ((n = (e = this.polygon).off) == null || n.call(e, "dragend", this.onDragEnd), (i = (o = this.polygon).off) == null || i.call(o, "rotateEnd", this.onRotateEndEnd));
+    var e, t, i, o;
+    this.polygon && ((t = (e = this.polygon).off) == null || t.call(e, "dragend", this.onDragEnd), (o = (i = this.polygon).off) == null || o.call(i, "rotateEnd", this.onRotateEndEnd));
   }
   close() {
     this.stop();
@@ -1432,8 +570,8 @@ class pa {
   stop() {
     this.map.off("mousemove", this.onPolygonRanging);
   }
-  updateDistanceText(e, { text: n, textPos: o }) {
-    e.setText(n), e.setPosition(o);
+  updateDistanceText(e, { text: t, textPos: i }) {
+    e.setText(t), e.setPosition(i);
   }
   removeLineDistanceText() {
     var e;
@@ -1443,66 +581,66 @@ class pa {
     return this.stop(), this.removeLineDistanceText(), this.destroyPolygonEvents(), this.polygon = null, this;
   }
 }
-class Rt {
+class $ {
   constructor() {
-    a(this, "events", {});
+    r(this, "events", {});
   }
   getEvents(e) {
     return this.events[e] || (this.events[e] = []), this.events[e];
   }
-  emit(e, ...n) {
-    this.getEvents(e).forEach((i) => i(...n));
+  emit(e, ...t) {
+    this.getEvents(e).forEach((o) => o(...t));
   }
-  on(e, n) {
-    !e || typeof e != "string" || this.getEvents(e).push(n);
+  on(e, t) {
+    !e || typeof e != "string" || this.getEvents(e).push(t);
   }
-  once(e, n) {
+  once(e, t) {
     if (!e || typeof e != "string")
       return;
-    const o = (i) => {
-      n(i), this.off(e, o);
+    const i = (o) => {
+      t(o), this.off(e, i);
     };
-    this.on(e, o);
+    this.on(e, i);
   }
-  off(e, n) {
+  off(e, t) {
     if (!(!e || typeof e != "string")) {
-      if (!n)
+      if (!t)
         return this.clearEvents(e);
-      this.events[e] = this.getEvents(e).filter((o) => o !== n);
+      this.events[e] = this.getEvents(e).filter((i) => i !== t);
     }
   }
-  hasEvents(e, n) {
-    return !!this.getEvents(e).find((o) => o === n);
+  hasEvents(e, t) {
+    return !!this.getEvents(e).find((i) => i === t);
   }
   clearEvents(e) {
     e ? this.events[e] = [] : this.events = {};
   }
 }
-class fa extends Rt {
-  constructor(n) {
+class vt extends $ {
+  constructor(t) {
     super();
-    a(this, "map");
+    r(this, "map");
     // 全部点
-    a(this, "circleMarkers", null);
+    r(this, "circleMarkers", null);
     // 编辑器
-    a(this, "polygonEditor", null);
+    r(this, "polygonEditor", null);
     // 多边形全部路径（包括中间点）
-    a(this, "polygonTotalPaths", []);
+    r(this, "polygonTotalPaths", []);
     // 操作点
-    a(this, "circleMarker", null);
+    r(this, "circleMarker", null);
     // 兜底设置编辑中间点标记列表路径
-    a(this, "editingMidTipMarkerListPath", null);
-    a(this, "onPolygonEditorAdjust", () => {
+    r(this, "editingMidTipMarkerListPath", null);
+    r(this, "onPolygonEditorAdjust", () => {
       Promise.resolve().then(() => {
         this.polygonTotalPaths = this.getPolygonEditorTargetTotalPaths(), this.circleMarkers.createCircleMarkersByPaths(this.polygonTotalPaths);
       });
     });
-    a(this, "onMouseDown", (n) => {
-      const o = n.lnglat;
-      this.circleMarker = this.circleMarkers.getPointInCircleMarkers(o), !(!this.circleMarker || !this.getEvents("mousedown").length) && this.emit("mousedown", this.circleMarker);
+    r(this, "onMouseDown", (t) => {
+      const i = t.lnglat;
+      this.circleMarker = this.circleMarkers.getPointInCircleMarkers(i), !(!this.circleMarker || !this.getEvents("mousedown").length) && this.emit("mousedown", this.circleMarker);
     });
-    a(this, "onMouseMove", (n) => {
-      !this.circleMarker || !this.getEvents("mousemove").length || this.emit("mousemove", this.circleMarker, n);
+    r(this, "onMouseMove", (t) => {
+      !this.circleMarker || !this.getEvents("mousemove").length || this.emit("mousemove", this.circleMarker, t);
     });
     // private onMouseOut = (event: Common.Event) => {
     //     if (!this.circleMarker) return;
@@ -1510,71 +648,71 @@ class fa extends Rt {
     //     if (!events.length) return;
     //     this.emit('mouseout', this.circleMarker, event);
     // };
-    a(this, "onMouseUp", () => {
+    r(this, "onMouseUp", () => {
       !this.getEvents("mouseup").length || !this.circleMarker || (this.emit("mouseup", this.circleMarker), this.circleMarker = null);
     });
-    this.map = n.map, this.polygonEditor = n, this.circleMarkers = new ft(this.map), this.open(this.polygonEditor);
+    this.map = t.map, this.polygonEditor = t, this.circleMarkers = new _(this.map), this.open(this.polygonEditor);
   }
   /**
    * 获取编辑器目标多边形路径
    * @returns
    */
   getPolygonEditorTargetPaths() {
-    var n;
-    return this.polygonEditor ? (n = this.polygonEditor.getTarget().getPath()) != null ? n : [] : [];
+    var t;
+    return this.polygonEditor ? (t = this.polygonEditor.getTarget().getPath()) != null ? t : [] : [];
   }
   /**
    *
    */
-  setEditingMidTipMarkerListPath(n) {
-    return this.editingMidTipMarkerListPath = n, this;
+  setEditingMidTipMarkerListPath(t) {
+    return this.editingMidTipMarkerListPath = t, this;
   }
   /**
    * 获取编辑中间点标记列表
    * @returns
    */
   getEditingMidTipMarkerList() {
-    var o, i;
-    const { singleRingListHandle: n } = this.polygonEditor;
+    var i, o;
+    const { singleRingListHandle: t } = this.polygonEditor;
     if (this.editingMidTipMarkerListPath) {
       if (typeof this.editingMidTipMarkerListPath == "function")
         return this.editingMidTipMarkerListPath(this.polygonEditor);
       if (typeof this.editingMidTipMarkerListPath == "string")
-        return Ie(this.polygonEditor, this.editingMidTipMarkerListPath);
+        return G(this.polygonEditor, this.editingMidTipMarkerListPath);
     }
-    return (o = this.polygonEditor.editingMidTipMarkerList) != null && o.length ? this.polygonEditor.editingMidTipMarkerList : n ? (i = n == null ? void 0 : n.list) == null ? void 0 : i.editingMidTipMarkerList : [];
+    return (i = this.polygonEditor.editingMidTipMarkerList) != null && i.length ? this.polygonEditor.editingMidTipMarkerList : t ? (o = t == null ? void 0 : t.list) == null ? void 0 : o.editingMidTipMarkerList : [];
   }
   /**
    * 获取编辑围栏所有点位（白色操作点+蓝色中间操作点）
    * @returns
    */
   getPolygonEditorTargetTotalPaths() {
-    const n = this.getPolygonEditorTargetPaths(), o = this.getEditingMidTipMarkerList();
-    let i = 0;
-    const r = [], s = n.length;
-    for (; i < s; ) {
-      r.push(n[i]);
-      const l = o[i];
-      l && r.push(l.getCenter()), i++;
+    const t = this.getPolygonEditorTargetPaths(), i = this.getEditingMidTipMarkerList();
+    let o = 0;
+    const s = [], a = t.length;
+    for (; o < a; ) {
+      s.push(t[o]);
+      const h = i[o];
+      h && s.push(h.getCenter()), o++;
     }
-    return r;
+    return s;
   }
   /**
   * 注册多边形编辑器，可操作点位事件
   */
-  open(n) {
-    this.start(n);
+  open(t) {
+    this.start(t);
   }
   /**
    * 注册多边形编辑器，可操作点位事件
    */
-  start(n) {
-    var i, r, s;
-    if (!n && !this.polygonEditor)
+  start(t) {
+    var o, s, a;
+    if (!t && !this.polygonEditor)
       throw new Error("polygonEditor not found");
-    this.polygonEditor = n;
-    const { midControlPoint: o } = this.polygonEditor;
-    return this.polygonTotalPaths = this.getPolygonEditorTargetTotalPaths(), this.circleMarkers.setOptions(o).createCircleMarkersByPaths(this.polygonTotalPaths), (i = this.polygonEditor) == null || i.on("adjust", this.onPolygonEditorAdjust), (r = this.polygonEditor) == null || r.on("removenode", this.onPolygonEditorAdjust), (s = this.polygonEditor) == null || s.on("addnode", this.onPolygonEditorAdjust), this.map.on("mousedown", this.onMouseDown), this.map.on("mousemove", this.onMouseMove), this.map.on("mouseup", this.onMouseUp), this;
+    this.polygonEditor = t;
+    const { midControlPoint: i } = this.polygonEditor;
+    return this.polygonTotalPaths = this.getPolygonEditorTargetTotalPaths(), this.circleMarkers.setOptions(i).createCircleMarkersByPaths(this.polygonTotalPaths), (o = this.polygonEditor) == null || o.on("adjust", this.onPolygonEditorAdjust), (s = this.polygonEditor) == null || s.on("removenode", this.onPolygonEditorAdjust), (a = this.polygonEditor) == null || a.on("addnode", this.onPolygonEditorAdjust), this.map.on("mousedown", this.onMouseDown), this.map.on("mousemove", this.onMouseMove), this.map.on("mouseup", this.onMouseUp), this;
   }
   /**
    * 停止事件行为
@@ -1592,273 +730,273 @@ class fa extends Rt {
     return this.close(), this.circleMarkers.destroy(), this;
   }
 }
-var da = Object.defineProperty, ya = (t, e, n) => e in t ? da(t, e, { enumerable: !0, configurable: !0, writable: !0, value: n }) : t[e] = n, L = (t, e, n) => (ya(t, typeof e != "symbol" ? e + "" : e, n), n);
-function ma(t) {
-  return t && t.__esModule && Object.prototype.hasOwnProperty.call(t, "default") ? t.default : t;
+var Mt = Object.defineProperty, Et = (n, e, t) => e in n ? Mt(n, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : n[e] = t, T = (n, e, t) => (Et(n, typeof e != "symbol" ? e + "" : e, t), t);
+function Tt(n) {
+  return n && n.__esModule && Object.prototype.hasOwnProperty.call(n, "default") ? n.default : n;
 }
-var It = { exports: {} }, U = typeof Reflect == "object" ? Reflect : null, ae = U && typeof U.apply == "function" ? U.apply : function(t, e, n) {
-  return Function.prototype.apply.call(t, e, n);
-}, Q;
-U && typeof U.ownKeys == "function" ? Q = U.ownKeys : Object.getOwnPropertySymbols ? Q = function(t) {
-  return Object.getOwnPropertyNames(t).concat(Object.getOwnPropertySymbols(t));
-} : Q = function(t) {
-  return Object.getOwnPropertyNames(t);
+var j = { exports: {} }, R = typeof Reflect == "object" ? Reflect : null, z = R && typeof R.apply == "function" ? R.apply : function(n, e, t) {
+  return Function.prototype.apply.call(n, e, t);
+}, w;
+R && typeof R.ownKeys == "function" ? w = R.ownKeys : Object.getOwnPropertySymbols ? w = function(n) {
+  return Object.getOwnPropertyNames(n).concat(Object.getOwnPropertySymbols(n));
+} : w = function(n) {
+  return Object.getOwnPropertyNames(n);
 };
-var Ke = Number.isNaN || function(t) {
-  return t !== t;
+var Z = Number.isNaN || function(n) {
+  return n !== n;
 };
-function p() {
-  p.init.call(this);
+function u() {
+  u.init.call(this);
 }
-It.exports = p;
-It.exports.once = ba;
-p.EventEmitter = p;
-p.prototype._events = void 0;
-p.prototype._eventsCount = 0;
-p.prototype._maxListeners = void 0;
-var le = 10;
-function it(t) {
-  if (typeof t != "function")
-    throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof t);
+j.exports = u;
+j.exports.once = Rt;
+u.EventEmitter = u;
+u.prototype._events = void 0;
+u.prototype._eventsCount = 0;
+u.prototype._maxListeners = void 0;
+var H = 10;
+function D(n) {
+  if (typeof n != "function")
+    throw new TypeError('The "listener" argument must be of type Function. Received type ' + typeof n);
 }
-Object.defineProperty(p, "defaultMaxListeners", {
+Object.defineProperty(u, "defaultMaxListeners", {
   enumerable: !0,
   get: function() {
-    return le;
+    return H;
   },
-  set: function(t) {
-    if (typeof t != "number" || t < 0 || Ke(t))
-      throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + t + ".");
-    le = t;
+  set: function(n) {
+    if (typeof n != "number" || n < 0 || Z(n))
+      throw new RangeError('The value of "defaultMaxListeners" is out of range. It must be a non-negative number. Received ' + n + ".");
+    H = n;
   }
 });
-p.init = function() {
+u.init = function() {
   (this._events === void 0 || this._events === Object.getPrototypeOf(this)._events) && (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0), this._maxListeners = this._maxListeners || void 0;
 };
-p.prototype.setMaxListeners = function(t) {
-  if (typeof t != "number" || t < 0 || Ke(t))
-    throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + t + ".");
-  return this._maxListeners = t, this;
+u.prototype.setMaxListeners = function(n) {
+  if (typeof n != "number" || n < 0 || Z(n))
+    throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + n + ".");
+  return this._maxListeners = n, this;
 };
-function ze(t) {
-  return t._maxListeners === void 0 ? p.defaultMaxListeners : t._maxListeners;
+function J(n) {
+  return n._maxListeners === void 0 ? u.defaultMaxListeners : n._maxListeners;
 }
-p.prototype.getMaxListeners = function() {
-  return ze(this);
+u.prototype.getMaxListeners = function() {
+  return J(this);
 };
-p.prototype.emit = function(t) {
-  for (var e = [], n = 1; n < arguments.length; n++)
-    e.push(arguments[n]);
-  var o = t === "error", i = this._events;
-  if (i !== void 0)
-    o = o && i.error === void 0;
-  else if (!o)
+u.prototype.emit = function(n) {
+  for (var e = [], t = 1; t < arguments.length; t++)
+    e.push(arguments[t]);
+  var i = n === "error", o = this._events;
+  if (o !== void 0)
+    i = i && o.error === void 0;
+  else if (!i)
     return !1;
-  if (o) {
-    var r;
-    if (e.length > 0 && (r = e[0]), r instanceof Error)
-      throw r;
-    var s = new Error("Unhandled error." + (r ? " (" + r.message + ")" : ""));
-    throw s.context = r, s;
+  if (i) {
+    var s;
+    if (e.length > 0 && (s = e[0]), s instanceof Error)
+      throw s;
+    var a = new Error("Unhandled error." + (s ? " (" + s.message + ")" : ""));
+    throw a.context = s, a;
   }
-  var l = i[t];
-  if (l === void 0)
+  var h = o[n];
+  if (h === void 0)
     return !1;
-  if (typeof l == "function")
-    ae(l, this, e);
+  if (typeof h == "function")
+    z(h, this, e);
   else
-    for (var h = l.length, c = Ve(l, h), n = 0; n < h; ++n)
-      ae(c[n], this, e);
+    for (var c = h.length, l = ot(h, c), t = 0; t < c; ++t)
+      z(l[t], this, e);
   return !0;
 };
-function Ge(t, e, n, o) {
-  var i, r, s;
-  if (it(n), r = t._events, r === void 0 ? (r = t._events = /* @__PURE__ */ Object.create(null), t._eventsCount = 0) : (r.newListener !== void 0 && (t.emit(
+function Q(n, e, t, i) {
+  var o, s, a;
+  if (D(t), s = n._events, s === void 0 ? (s = n._events = /* @__PURE__ */ Object.create(null), n._eventsCount = 0) : (s.newListener !== void 0 && (n.emit(
     "newListener",
     e,
-    n.listener ? n.listener : n
-  ), r = t._events), s = r[e]), s === void 0)
-    s = r[e] = n, ++t._eventsCount;
-  else if (typeof s == "function" ? s = r[e] = o ? [n, s] : [s, n] : o ? s.unshift(n) : s.push(n), i = ze(t), i > 0 && s.length > i && !s.warned) {
-    s.warned = !0;
-    var l = new Error("Possible EventEmitter memory leak detected. " + s.length + " " + String(e) + " listeners added. Use emitter.setMaxListeners() to increase limit");
-    l.name = "MaxListenersExceededWarning", l.emitter = t, l.type = e, l.count = s.length;
+    t.listener ? t.listener : t
+  ), s = n._events), a = s[e]), a === void 0)
+    a = s[e] = t, ++n._eventsCount;
+  else if (typeof a == "function" ? a = s[e] = i ? [t, a] : [a, t] : i ? a.unshift(t) : a.push(t), o = J(n), o > 0 && a.length > o && !a.warned) {
+    a.warned = !0;
+    var h = new Error("Possible EventEmitter memory leak detected. " + a.length + " " + String(e) + " listeners added. Use emitter.setMaxListeners() to increase limit");
+    h.name = "MaxListenersExceededWarning", h.emitter = n, h.type = e, h.count = a.length;
   }
-  return t;
+  return n;
 }
-p.prototype.addListener = function(t, e) {
-  return Ge(this, t, e, !1);
+u.prototype.addListener = function(n, e) {
+  return Q(this, n, e, !1);
 };
-p.prototype.on = p.prototype.addListener;
-p.prototype.prependListener = function(t, e) {
-  return Ge(this, t, e, !0);
+u.prototype.on = u.prototype.addListener;
+u.prototype.prependListener = function(n, e) {
+  return Q(this, n, e, !0);
 };
-function Pa() {
+function xt() {
   if (!this.fired)
     return this.target.removeListener(this.type, this.wrapFn), this.fired = !0, arguments.length === 0 ? this.listener.call(this.target) : this.listener.apply(this.target, arguments);
 }
-function He(t, e, n) {
-  var o = { fired: !1, wrapFn: void 0, target: t, type: e, listener: n }, i = Pa.bind(o);
-  return i.listener = n, o.wrapFn = i, i;
+function tt(n, e, t) {
+  var i = { fired: !1, wrapFn: void 0, target: n, type: e, listener: t }, o = xt.bind(i);
+  return o.listener = t, i.wrapFn = o, o;
 }
-p.prototype.once = function(t, e) {
-  return it(e), this.on(t, He(this, t, e)), this;
+u.prototype.once = function(n, e) {
+  return D(e), this.on(n, tt(this, n, e)), this;
 };
-p.prototype.prependOnceListener = function(t, e) {
-  return it(e), this.prependListener(t, He(this, t, e)), this;
+u.prototype.prependOnceListener = function(n, e) {
+  return D(e), this.prependListener(n, tt(this, n, e)), this;
 };
-p.prototype.removeListener = function(t, e) {
-  var n, o, i, r, s;
-  if (it(e), o = this._events, o === void 0)
+u.prototype.removeListener = function(n, e) {
+  var t, i, o, s, a;
+  if (D(e), i = this._events, i === void 0)
     return this;
-  if (n = o[t], n === void 0)
+  if (t = i[n], t === void 0)
     return this;
-  if (n === e || n.listener === e)
-    --this._eventsCount === 0 ? this._events = /* @__PURE__ */ Object.create(null) : (delete o[t], o.removeListener && this.emit("removeListener", t, n.listener || e));
-  else if (typeof n != "function") {
-    for (i = -1, r = n.length - 1; r >= 0; r--)
-      if (n[r] === e || n[r].listener === e) {
-        s = n[r].listener, i = r;
+  if (t === e || t.listener === e)
+    --this._eventsCount === 0 ? this._events = /* @__PURE__ */ Object.create(null) : (delete i[n], i.removeListener && this.emit("removeListener", n, t.listener || e));
+  else if (typeof t != "function") {
+    for (o = -1, s = t.length - 1; s >= 0; s--)
+      if (t[s] === e || t[s].listener === e) {
+        a = t[s].listener, o = s;
         break;
       }
-    if (i < 0)
+    if (o < 0)
       return this;
-    i === 0 ? n.shift() : va(n, i), n.length === 1 && (o[t] = n[0]), o.removeListener !== void 0 && this.emit("removeListener", t, s || e);
+    o === 0 ? t.shift() : Lt(t, o), t.length === 1 && (i[n] = t[0]), i.removeListener !== void 0 && this.emit("removeListener", n, a || e);
   }
   return this;
 };
-p.prototype.off = p.prototype.removeListener;
-p.prototype.removeAllListeners = function(t) {
-  var e, n, o;
-  if (n = this._events, n === void 0)
+u.prototype.off = u.prototype.removeListener;
+u.prototype.removeAllListeners = function(n) {
+  var e, t, i;
+  if (t = this._events, t === void 0)
     return this;
-  if (n.removeListener === void 0)
-    return arguments.length === 0 ? (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0) : n[t] !== void 0 && (--this._eventsCount === 0 ? this._events = /* @__PURE__ */ Object.create(null) : delete n[t]), this;
+  if (t.removeListener === void 0)
+    return arguments.length === 0 ? (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0) : t[n] !== void 0 && (--this._eventsCount === 0 ? this._events = /* @__PURE__ */ Object.create(null) : delete t[n]), this;
   if (arguments.length === 0) {
-    var i = Object.keys(n), r;
-    for (o = 0; o < i.length; ++o)
-      r = i[o], r !== "removeListener" && this.removeAllListeners(r);
+    var o = Object.keys(t), s;
+    for (i = 0; i < o.length; ++i)
+      s = o[i], s !== "removeListener" && this.removeAllListeners(s);
     return this.removeAllListeners("removeListener"), this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0, this;
   }
-  if (e = n[t], typeof e == "function")
-    this.removeListener(t, e);
+  if (e = t[n], typeof e == "function")
+    this.removeListener(n, e);
   else if (e !== void 0)
-    for (o = e.length - 1; o >= 0; o--)
-      this.removeListener(t, e[o]);
+    for (i = e.length - 1; i >= 0; i--)
+      this.removeListener(n, e[i]);
   return this;
 };
-function Ye(t, e, n) {
-  var o = t._events;
-  if (o === void 0)
+function et(n, e, t) {
+  var i = n._events;
+  if (i === void 0)
     return [];
-  var i = o[e];
-  return i === void 0 ? [] : typeof i == "function" ? n ? [i.listener || i] : [i] : n ? Ta(i) : Ve(i, i.length);
+  var o = i[e];
+  return o === void 0 ? [] : typeof o == "function" ? t ? [o.listener || o] : [o] : t ? kt(o) : ot(o, o.length);
 }
-p.prototype.listeners = function(t) {
-  return Ye(this, t, !0);
+u.prototype.listeners = function(n) {
+  return et(this, n, !0);
 };
-p.prototype.rawListeners = function(t) {
-  return Ye(this, t, !1);
+u.prototype.rawListeners = function(n) {
+  return et(this, n, !1);
 };
-p.listenerCount = function(t, e) {
-  return typeof t.listenerCount == "function" ? t.listenerCount(e) : Xe.call(t, e);
+u.listenerCount = function(n, e) {
+  return typeof n.listenerCount == "function" ? n.listenerCount(e) : it.call(n, e);
 };
-p.prototype.listenerCount = Xe;
-function Xe(t) {
+u.prototype.listenerCount = it;
+function it(n) {
   var e = this._events;
   if (e !== void 0) {
-    var n = e[t];
-    if (typeof n == "function")
+    var t = e[n];
+    if (typeof t == "function")
       return 1;
-    if (n !== void 0)
-      return n.length;
+    if (t !== void 0)
+      return t.length;
   }
   return 0;
 }
-p.prototype.eventNames = function() {
-  return this._eventsCount > 0 ? Q(this._events) : [];
+u.prototype.eventNames = function() {
+  return this._eventsCount > 0 ? w(this._events) : [];
 };
-function Ve(t, e) {
-  for (var n = new Array(e), o = 0; o < e; ++o)
-    n[o] = t[o];
-  return n;
+function ot(n, e) {
+  for (var t = new Array(e), i = 0; i < e; ++i)
+    t[i] = n[i];
+  return t;
 }
-function va(t, e) {
-  for (; e + 1 < t.length; e++)
-    t[e] = t[e + 1];
-  t.pop();
+function Lt(n, e) {
+  for (; e + 1 < n.length; e++)
+    n[e] = n[e + 1];
+  n.pop();
 }
-function Ta(t) {
-  for (var e = new Array(t.length), n = 0; n < e.length; ++n)
-    e[n] = t[n].listener || t[n];
+function kt(n) {
+  for (var e = new Array(n.length), t = 0; t < e.length; ++t)
+    e[t] = n[t].listener || n[t];
   return e;
 }
-function ba(t, e) {
-  return new Promise(function(n, o) {
-    function i(s) {
-      t.removeListener(e, r), o(s);
+function Rt(n, e) {
+  return new Promise(function(t, i) {
+    function o(a) {
+      n.removeListener(e, s), i(a);
     }
-    function r() {
-      typeof t.removeListener == "function" && t.removeListener("error", i), n([].slice.call(arguments));
+    function s() {
+      typeof n.removeListener == "function" && n.removeListener("error", o), t([].slice.call(arguments));
     }
-    We(t, e, r, { once: !0 }), e !== "error" && Ma(t, i, { once: !0 });
+    nt(n, e, s, { once: !0 }), e !== "error" && Ct(n, o, { once: !0 });
   });
 }
-function Ma(t, e, n) {
-  typeof t.on == "function" && We(t, "error", e, n);
+function Ct(n, e, t) {
+  typeof n.on == "function" && nt(n, "error", e, t);
 }
-function We(t, e, n, o) {
-  if (typeof t.on == "function")
-    o.once ? t.once(e, n) : t.on(e, n);
-  else if (typeof t.addEventListener == "function")
-    t.addEventListener(e, function i(r) {
-      o.once && t.removeEventListener(e, i), n(r);
+function nt(n, e, t, i) {
+  if (typeof n.on == "function")
+    i.once ? n.once(e, t) : n.on(e, t);
+  else if (typeof n.addEventListener == "function")
+    n.addEventListener(e, function o(s) {
+      i.once && n.removeEventListener(e, o), t(s);
     });
   else
-    throw new TypeError('The "emitter" argument must be of type EventEmitter. Received type ' + typeof t);
+    throw new TypeError('The "emitter" argument must be of type EventEmitter. Received type ' + typeof n);
 }
-var Ea = It.exports;
-const xa = /* @__PURE__ */ ma(Ea), La = (t = "uid") => `${t}_${Math.random().toString(16).substring(2)}`, Ca = (t, e = 2) => Number.isNaN(+t) ? t : +(+t).toFixed(e), he = "-26px";
-class wa extends xa {
-  constructor(e, n = {}) {
-    if (super(), L(this, "centerPos", { x: 0, y: 0 }), L(this, "startPos", { x: 0, y: 0 }), L(this, "originRotate", 0), L(this, "target", null), L(this, "container"), L(this, "options"), L(this, "targetClassName", La()), L(this, "isMobile", typeof window.orientation < "u" || "ontouchstart" in document.documentElement || /Mobi|Android|iPhone/i.test(navigator.userAgent)), L(this, "onMouseDown", (o) => {
-      o.stopPropagation(), this.originRotate = 0, this.startPos = this.getClickPos(o), this.calcCenterPos();
-      const i = this.container.style.transform, r = /rotate\((.*)deg\)/g;
-      i.replace(
-        r,
-        (l, h) => (h = +h, this.originRotate += h)
+var bt = j.exports;
+const It = /* @__PURE__ */ Tt(bt), wt = (n = "uid") => `${n}_${Math.random().toString(16).substring(2)}`, Dt = (n, e = 2) => Number.isNaN(+n) ? n : +(+n).toFixed(e), W = "-26px";
+class Ot extends It {
+  constructor(e, t = {}) {
+    if (super(), T(this, "centerPos", { x: 0, y: 0 }), T(this, "startPos", { x: 0, y: 0 }), T(this, "originRotate", 0), T(this, "target", null), T(this, "container"), T(this, "options"), T(this, "targetClassName", wt()), T(this, "isMobile", typeof window.orientation < "u" || "ontouchstart" in document.documentElement || /Mobi|Android|iPhone/i.test(navigator.userAgent)), T(this, "onMouseDown", (i) => {
+      i.stopPropagation(), this.originRotate = 0, this.startPos = this.getClickPos(i), this.calcCenterPos();
+      const o = this.container.style.transform, s = /rotate\((.*)deg\)/g;
+      o.replace(
+        s,
+        (h, c) => (c = +c, this.originRotate += c)
       ), this.originRotate = (+this.originRotate || 0) % 360;
-      const s = {
-        event: o,
+      const a = {
+        event: i,
         target: this.container,
         rotate: this.originRotate
       };
-      this.emit("rotateStart", s), this.isMobile ? (document.addEventListener("touchmove", this.onMouseMove, !1), document.addEventListener("touchend", this.onMouseUp, !1)) : (document.addEventListener("mousemove", this.onMouseMove, !1), document.addEventListener("mouseup", this.onMouseUp, !1));
-    }), L(this, "onMouseMove", (o) => {
-      const i = this.container.style.transform || "rotate(0deg)", r = this.getClickPos(o), s = Ca(
-        (this.calcRotate(this.startPos, r) + this.originRotate) % 360
-      ), l = /rotate\(.*deg\)/g, h = i.replace(
-        l,
-        () => `rotate(${s}deg)`
+      this.emit("rotateStart", a), this.isMobile ? (document.addEventListener("touchmove", this.onMouseMove, !1), document.addEventListener("touchend", this.onMouseUp, !1)) : (document.addEventListener("mousemove", this.onMouseMove, !1), document.addEventListener("mouseup", this.onMouseUp, !1));
+    }), T(this, "onMouseMove", (i) => {
+      const o = this.container.style.transform || "rotate(0deg)", s = this.getClickPos(i), a = Dt(
+        (this.calcRotate(this.startPos, s) + this.originRotate) % 360
+      ), h = /rotate\(.*deg\)/g, c = o.replace(
+        h,
+        () => `rotate(${a}deg)`
       );
-      this.container.style.transform = h;
-      const c = { event: o, target: this.container, rotate: s };
-      this.emit("rotate", c);
-    }), L(this, "onMouseUp", (o) => {
-      const i = { event: o, target: this.container };
-      this.emit("rotateEnd", i), this.isMobile ? (document.removeEventListener("touchmove", this.onMouseMove, !1), document.removeEventListener("touchend", this.onMouseUp, !1)) : (document.removeEventListener("mousemove", this.onMouseMove, !1), document.removeEventListener("mouseup", this.onMouseUp, !1));
+      this.container.style.transform = c;
+      const l = { event: i, target: this.container, rotate: a };
+      this.emit("rotate", l);
+    }), T(this, "onMouseUp", (i) => {
+      const o = { event: i, target: this.container };
+      this.emit("rotateEnd", o), this.isMobile ? (document.removeEventListener("touchmove", this.onMouseMove, !1), document.removeEventListener("touchend", this.onMouseUp, !1)) : (document.removeEventListener("mousemove", this.onMouseMove, !1), document.removeEventListener("mouseup", this.onMouseUp, !1));
     }), !e)
       throw new Error("not found container");
-    this.container = e, this.options = n, this.originRotate = (this.options.rotate || 0) % 360, this.createTargetElement(), this.setInitStyle(), this.calcCenterPos(), this.registryEvents();
+    this.container = e, this.options = t, this.originRotate = (this.options.rotate || 0) % 360, this.createTargetElement(), this.setInitStyle(), this.calcCenterPos(), this.registryEvents();
   }
   createTargetElement() {
     var e;
-    const { top: n = he, able: o } = this.options;
-    let i = `${n}`.replace("px", "").trim();
-    i.indexOf("%") === -1 && (i = Number.isNaN(+i) ? he : `${i}px`);
-    const r = `
+    const { top: t = W, able: i } = this.options;
+    let o = `${t}`.replace("px", "").trim();
+    o.indexOf("%") === -1 && (o = Number.isNaN(+o) ? W : `${o}px`);
+    const s = `
         position: absolute;
-        top: ${i};
+        top: ${o};
         left: 50%;
         min-width: 14px;
         min-height: 14px;
@@ -1867,8 +1005,8 @@ class wa extends xa {
         justify-content: center;
         transform: translate(-50%, -50%);
         cursor: pointer;
-      `, s = `
-      <div class="${this.targetClassName}" style="${r}">
+      `, a = `
+      <div class="${this.targetClassName}" style="${s}">
         <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M10.536 3.464A5 5 0 1 0 11 10l1.424 1.425a7 7 0 1 1-.475-9.374L13.659.34A.2.2 0 0 1 14 .483V5.5a.5.5 0 0 1-.5.5H8.483a.2.2 0 0 1-.142-.341l2.195-2.195z"
@@ -1876,24 +1014,24 @@ class wa extends xa {
               fillRule="nonzero"
             />
           </svg>
-      </div>`, l = new DOMParser().parseFromString(s, "text/html"), h = l.body.firstChild;
-    if (o instanceof Element) {
-      const c = l.body.querySelector("svg");
-      h.replaceChild(o, c);
+      </div>`, h = new DOMParser().parseFromString(a, "text/html"), c = h.body.firstChild;
+    if (i instanceof Element) {
+      const l = h.body.querySelector("svg");
+      c.replaceChild(i, l);
     }
-    (e = this.container) == null || e.appendChild(h), this.target = document.querySelector(`.${this.targetClassName}`);
+    (e = this.container) == null || e.appendChild(c), this.target = document.querySelector(`.${this.targetClassName}`);
   }
   setInitStyle() {
     var e;
     if ((e = this.container) != null && e.style.getPropertyValue("position") || (this.container.style.position = "relative"), this.originRotate) {
-      const n = window.getComputedStyle(this.container, null);
-      let o = this.container.style.transform || n.getPropertyValue("transform");
-      o = o.replace(/rotate\((.*)deg\)/g, "").trim(), o = o === "none" ? "" : o, this.container.style.transform = `${o} rotate(${this.originRotate}deg)`;
+      const t = window.getComputedStyle(this.container, null);
+      let i = this.container.style.transform || t.getPropertyValue("transform");
+      i = i.replace(/rotate\((.*)deg\)/g, "").trim(), i = i === "none" ? "" : i, this.container.style.transform = `${i} rotate(${this.originRotate}deg)`;
     }
   }
   calcCenterPos() {
-    const { x: e, y: n, width: o, height: i } = this.container.getBoundingClientRect(), r = e + o / 2, s = n + i / 2;
-    this.setCenterPos({ x: r, y: s });
+    const { x: e, y: t, width: i, height: o } = this.container.getBoundingClientRect(), s = e + i / 2, a = t + o / 2;
+    this.setCenterPos({ x: s, y: a });
   }
   setCenterPos(e) {
     this.centerPos.x = e.x, this.centerPos.y = e.y;
@@ -1908,9 +1046,9 @@ class wa extends xa {
     return this.isMobile ? (document.removeEventListener("touchstart", this.onMouseDown, !1), document.removeEventListener("touchmove", this.onMouseMove, !1), document.removeEventListener("touchend", this.onMouseUp, !1)) : (document.removeEventListener("mousedown", this.onMouseDown, !1), document.removeEventListener("mousemove", this.onMouseMove, !1), document.removeEventListener("mouseup", this.onMouseUp, !1)), this;
   }
   getClickPos(e) {
-    var n, o, i, r;
-    const s = this.isMobile ? (o = (n = e.touches) == null ? void 0 : n[0]) == null ? void 0 : o.pageX : e.x, l = this.isMobile ? (r = (i = e.touches) == null ? void 0 : i[0]) == null ? void 0 : r.pageY : e.y;
-    return { x: s, y: l };
+    var t, i, o, s;
+    const a = this.isMobile ? (i = (t = e.touches) == null ? void 0 : t[0]) == null ? void 0 : i.pageX : e.x, h = this.isMobile ? (s = (o = e.touches) == null ? void 0 : o[0]) == null ? void 0 : s.pageY : e.y;
+    return { x: a, y: h };
   }
   /**
    * 计算旋转角度
@@ -1918,35 +1056,35 @@ class wa extends xa {
    * @param finalPoint - 结束点位
    * @returns
    */
-  calcRotate(e, n) {
-    const { x: o, y: i } = this.centerPos, r = {
-      x: e.x - o,
-      y: e.y - i
-    }, s = {
-      x: n.x - o,
-      y: n.y - i
-    }, l = r.x * s.x + r.y * s.y, h = r.x * s.y - r.y * s.x;
-    let c = Math.atan2(h, l);
-    return c = (c + 2 * Math.PI) % (2 * Math.PI), c * (180 / Math.PI);
+  calcRotate(e, t) {
+    const { x: i, y: o } = this.centerPos, s = {
+      x: e.x - i,
+      y: e.y - o
+    }, a = {
+      x: t.x - i,
+      y: t.y - o
+    }, h = s.x * a.x + s.y * a.y, c = s.x * a.y - s.y * a.x;
+    let l = Math.atan2(c, h);
+    return l = (l + 2 * Math.PI) % (2 * Math.PI), l * (180 / Math.PI);
   }
 }
-const Ra = (t, e) => Math.sqrt(Math.pow(Math.abs(t.x - e.x), 2) + Math.pow(Math.abs(t.y - e.y), 2)), dt = 1e-8, ct = 10;
-class Ia extends Rt {
-  constructor(n, o = {}) {
+const At = (n, e) => Math.sqrt(Math.pow(Math.abs(n.x - e.x), 2) + Math.pow(Math.abs(n.y - e.y), 2)), N = 1e-8, B = 10;
+class St extends $ {
+  constructor(t, i = {}) {
     super();
-    a(this, "likeRectangleIns");
-    a(this, "opts");
-    a(this, "elementRotatorIns", null);
-    a(this, "rotationPointIns", null);
-    a(this, "midPoint");
-    a(this, "initAngle");
-    a(this, "offset");
-    a(this, "rotationLine");
-    a(this, "customRotationDOMId", `ID${at()}`);
-    a(this, "moveableElementId", `ID${at()}`);
-    a(this, "targetElementId", `ID${at()}`);
-    a(this, "genMarkerContent", () => {
-      const o = `width:${0.05}px; height:${0.05}px;`, i = Object.entries({
+    r(this, "likeRectangleIns");
+    r(this, "opts");
+    r(this, "elementRotatorIns", null);
+    r(this, "rotationPointIns", null);
+    r(this, "midPoint");
+    r(this, "initAngle");
+    r(this, "offset");
+    r(this, "rotationLine");
+    r(this, "customRotationDOMId", `ID${S()}`);
+    r(this, "moveableElementId", `ID${S()}`);
+    r(this, "targetElementId", `ID${S()}`);
+    r(this, "genMarkerContent", () => {
+      const i = `width:${0.05}px; height:${0.05}px;`, o = Object.entries({
         display: "inline-block",
         width: `${this.radius}px`,
         height: `${this.radius}px`,
@@ -1955,66 +1093,67 @@ class Ia extends Rt {
         border: "2px solid #cc6666",
         "border-radius": "50%",
         "transform-origin": "50% 100%"
-      }).reduce((s, [l, h]) => s += `${l}:${h};`, "");
+      }).reduce((a, [h, c]) => a += `${h}:${c};`, "");
       return `
             <div
-                style="position: relative; ${o}; background: red;"
+                style="position: relative; ${i}; background: red;"
                 data-rotatable-ref="${this.moveableElementId}"
             >
-                <div data-rotatable-ref=${this.customRotationDOMId} style="${i}"></div>
+                <div data-rotatable-ref=${this.customRotationDOMId} style="${o}"></div>
             </div>
         `;
     });
-    a(this, "setMarkerRotatable", () => {
-      const n = document.querySelector(`[data-rotatable-ref="${this.moveableElementId}"]`), o = document.querySelector(`[data-rotatable-ref="${this.customRotationDOMId}"]`), i = this.calcInitOffset(), r = { rotate: this.initAngle, top: -i, able: o };
-      this.elementRotatorIns = new wa(n, r), this.registryEvent();
+    r(this, "setMarkerRotatable", () => {
+      const t = document.querySelector(`[data-rotatable-ref="${this.moveableElementId}"]`), i = document.querySelector(`[data-rotatable-ref="${this.customRotationDOMId}"]`), o = this.calcInitOffset(), s = { rotate: this.initAngle, top: -o, able: i };
+      this.elementRotatorIns = new Ot(t, s), this.registryEvent();
     });
-    a(this, "onRotateStart", () => {
+    r(this, "onRotateStart", () => {
       this.emit("rotateStart", this.likeRectangleIns);
     });
-    a(this, "onRotate", (n) => {
-      const { event: o, rotate: i } = n;
-      this.rotate(i - this.initAngle), this.emit("rotate", o);
+    r(this, "onRotate", (t) => {
+      const { event: i, rotate: o } = t;
+      this.rotate(o - this.initAngle), this.emit("rotate", i);
     });
-    a(this, "onRotateEnd", () => {
+    r(this, "onRotateEnd", () => {
       this.emit("rotateEnd", this.likeRectangleIns);
     });
-    a(this, "rotate", (n) => {
-      const o = this.mapIns.lngLatToContainer(this.center), i = this.likeRectangleIns.leftTop, r = this.mapIns.lngLatToContainer(i), s = this.calcRotatePoint(r, o, n), l = new AMap.Pixel(s.x, s.y), h = this.mapIns.containerToLngLat(l), c = this.likeRectangleIns.rightTop, u = this.mapIns.lngLatToContainer(c), g = this.calcRotatePoint(u, o, n), y = new AMap.Pixel(g.x, g.y), v = this.mapIns.containerToLngLat(y), m = this.likeRectangleIns.rightBottom, T = this.mapIns.lngLatToContainer(m), P = this.calcRotatePoint(T, o, n), M = new AMap.Pixel(P.x, P.y), G = this.mapIns.containerToLngLat(M), Z = this.likeRectangleIns.leftBottom, qe = this.mapIns.lngLatToContainer(Z), _t = this.calcRotatePoint(qe, o, n), Ze = new AMap.Pixel(_t.x, _t.y), kt = this.mapIns.containerToLngLat(Ze), Je = [
-        [h.lng, h.lat],
-        [v.lng, v.lat],
-        [G.lng, G.lat],
-        [kt.lng, kt.lat]
+    r(this, "rotate", (t) => {
+      const i = this.mapIns.lngLatToContainer(this.center), o = this.likeRectangleIns.leftTop, s = this.mapIns.lngLatToContainer(o), a = this.calcRotatePoint(s, i, t), h = new AMap.Pixel(a.x, a.y), c = this.mapIns.containerToLngLat(h), l = this.likeRectangleIns.rightTop, g = this.mapIns.lngLatToContainer(l), d = this.calcRotatePoint(g, i, t), f = new AMap.Pixel(d.x, d.y), y = this.mapIns.containerToLngLat(f), p = this.likeRectangleIns.rightBottom, P = this.mapIns.lngLatToContainer(p), E = this.calcRotatePoint(P, i, t), b = new AMap.Pixel(E.x, E.y), C = this.mapIns.containerToLngLat(b), I = this.likeRectangleIns.leftBottom, st = this.mapIns.lngLatToContainer(I), U = this.calcRotatePoint(st, i, t), rt = new AMap.Pixel(U.x, U.y), F = this.mapIns.containerToLngLat(rt), at = [
+        [c.lng, c.lat],
+        [y.lng, y.lat],
+        [C.lng, C.lat],
+        [F.lng, F.lat]
       ];
-      this.likeRectangleIns.setPath(Je);
+      this.likeRectangleIns.setPath(at);
     });
-    a(this, "calcRotatePoint", (n, o, i) => {
-      const r = n.x, s = n.y, l = o.x, h = o.y, c = i * Math.PI / 180, u = r - l, g = s - h, y = u * Math.cos(c) - g * Math.sin(c) + l, v = u * Math.sin(c) + g * Math.cos(c) + h;
-      return { x: y, y: v };
+    r(this, "calcRotatePoint", (t, i, o) => {
+      const s = t.x, a = t.y, h = i.x, c = i.y, l = o * Math.PI / 180, g = s - h, d = a - c, f = g * Math.cos(l) - d * Math.sin(l) + h, y = g * Math.sin(l) + d * Math.cos(l) + c;
+      return { x: f, y };
     });
-    a(this, "getDOMTransformRotate", (n) => {
-      var r;
-      if (!n)
+    r(this, "getDOMTransformRotate", (t) => {
+      var s;
+      if (!t)
         return 0;
-      let o = null;
-      return (((r = n == null ? void 0 : n.style) == null ? void 0 : r.transform) || "").replace(/rotate\((.*)deg\)/g, (s, l) => o = l), +o || 0;
+      let i = null;
+      return (((s = t == null ? void 0 : t.style) == null ? void 0 : s.transform) || "").replace(/rotate\((.*)deg\)/g, (a, h) => i = h), +i || 0;
     });
-    a(this, "updateRotationAbleOffset", () => {
-      const n = this.elementRotatorIns.target;
-      n.style.top = `-${this.calcInitOffset()}`;
+    r(this, "updateRotationAbleOffset", () => {
+      var i;
+      const t = (i = this.elementRotatorIns) == null ? void 0 : i.target;
+      t && (t.style.top = `-${this.calcInitOffset()}`);
     });
-    a(this, "onDragStart", () => _(this, null, function* () {
+    r(this, "onDragStart", () => x(this, null, function* () {
       this.reset();
     }));
     /**
      * 拖拽结束后，需要重新计算一下点位数据
      */
-    a(this, "onDragEnd", () => _(this, null, function* () {
+    r(this, "onDragEnd", () => x(this, null, function* () {
       this.open();
     }));
-    if (!n)
+    if (!t)
       throw new Error("likeRectangleIns is required");
-    this.likeRectangleIns = n, this.opts = o, this.open();
+    this.likeRectangleIns = t, this.opts = i, this.open();
   }
   get mapIns() {
     return this.likeRectangleIns.likeRectangle.map;
@@ -2023,30 +1162,30 @@ class Ia extends Rt {
     return this.likeRectangleIns.likeRectangle.center;
   }
   get rotatable() {
-    var n, o, i;
-    return (i = (o = (n = this.likeRectangleIns) == null ? void 0 : n.likeRectangle) == null ? void 0 : o.opts) == null ? void 0 : i.rotatable;
+    var t, i, o;
+    return (o = (i = (t = this.likeRectangleIns) == null ? void 0 : t.likeRectangle) == null ? void 0 : i.opts) == null ? void 0 : o.rotatable;
   }
   get draggable() {
-    var o;
-    return ((o = this.likeRectangleIns) == null ? void 0 : o.getOptions()).draggable;
+    var i;
+    return ((i = this.likeRectangleIns) == null ? void 0 : i.getOptions()).draggable;
   }
   get radius() {
-    const { controllerPointRadius: n = ct } = this.opts;
-    return Math.max(+`${n}`.replace("px", "") || ct, ct);
+    const { controllerPointRadius: t = B } = this.opts;
+    return Math.max(+`${t}`.replace("px", "") || B, B);
   }
   open() {
     this.rotatable && (this.calcMidPoint(), this.calcInitAngle(), this.setRotationLine(), this.registryLikeRectangleEvents(), this.createRotationPoint());
   }
   reset() {
-    var n, o, i, r;
-    (o = (n = this.elementRotatorIns) == null ? void 0 : n.destroy) == null || o.call(n), this.elementRotatorIns = null, (r = (i = this.rotationPointIns) == null ? void 0 : i.destroy) == null || r.call(i), this.rotationPointIns = null;
+    var t, i, o, s;
+    (i = (t = this.elementRotatorIns) == null ? void 0 : t.destroy) == null || i.call(t), this.elementRotatorIns = null, (s = (o = this.rotationPointIns) == null ? void 0 : o.destroy) == null || s.call(o), this.rotationPointIns = null;
   }
   close() {
-    this.reset(), this.destroyLikeRectangleEvents(), this.destroyEvent();
+    this.destroyEvent(), this.destroyLikeRectangleEvents(), this.reset();
   }
   registryLikeRectangleEvents() {
-    const n = this.likeRectangleIns.hasEvents("dragstart", this.onDragStart);
-    this.draggable && !n && (this.likeRectangleIns.on("dragstart", this.onDragStart), this.likeRectangleIns.on("dragend", this.onDragEnd));
+    const t = this.likeRectangleIns.hasEvents("dragstart", this.onDragStart);
+    this.draggable && !t && (this.likeRectangleIns.on("dragstart", this.onDragStart), this.likeRectangleIns.on("dragend", this.onDragEnd));
   }
   destroyLikeRectangleEvents() {
     this.likeRectangleIns.off("dragstart", this.onDragStart), this.likeRectangleIns.off("dragend", this.onDragEnd);
@@ -2055,9 +1194,9 @@ class Ia extends Rt {
    * 旋转点（即中心点）
    */
   createRotationPoint() {
-    return _(this, null, function* () {
-      var n, o;
-      (o = (n = this.rotationPointIns) == null ? void 0 : n.destroy) == null || o.call(n), this.rotationPointIns = null, this.rotationPointIns = new AMap.Marker({
+    return x(this, null, function* () {
+      var t, i;
+      (i = (t = this.rotationPointIns) == null ? void 0 : t.destroy) == null || i.call(t), this.rotationPointIns = null, this.rotationPointIns = new AMap.Marker({
         map: this.mapIns,
         position: this.center,
         content: this.genMarkerContent()
@@ -2065,28 +1204,28 @@ class Ia extends Rt {
     });
   }
   registryEvent() {
-    var n, o;
-    this.elementRotatorIns && (this.elementRotatorIns.on("rotateStart", this.onRotateStart), this.elementRotatorIns.on("rotate", this.onRotate), this.elementRotatorIns.on("rotateEnd", this.onRotateEnd), (o = (n = this.mapIns) == null ? void 0 : n.on) == null || o.call(n, "zoomchange", this.updateRotationAbleOffset));
+    var t, i;
+    this.elementRotatorIns && (this.elementRotatorIns.on("rotateStart", this.onRotateStart), this.elementRotatorIns.on("rotate", this.onRotate), this.elementRotatorIns.on("rotateEnd", this.onRotateEnd), (i = (t = this.mapIns) == null ? void 0 : t.on) == null || i.call(t, "zoomchange", this.updateRotationAbleOffset));
   }
   destroyEvent() {
-    var n, o;
-    this.elementRotatorIns && (this.elementRotatorIns.off("rotateStart", this.onRotateStart), this.elementRotatorIns.off("rotate", this.onRotate), this.elementRotatorIns.off("rotateEnd", this.onRotateEnd), (o = (n = this.mapIns) == null ? void 0 : n.off) == null || o.call(n, "zoomchange", this.updateRotationAbleOffset));
+    var t, i;
+    this.elementRotatorIns && (this.elementRotatorIns.off("rotateStart", this.onRotateStart), this.elementRotatorIns.off("rotate", this.onRotate), this.elementRotatorIns.off("rotateEnd", this.onRotateEnd), (i = (t = this.mapIns) == null ? void 0 : t.off) == null || i.call(t, "zoomchange", this.updateRotationAbleOffset));
   }
   calcMidPoint() {
-    var P, M, G;
-    const n = (G = (M = (P = this.likeRectangleIns) == null ? void 0 : P.getPath) == null ? void 0 : M.call(P)) == null ? void 0 : G.map((Z) => [Z.lng, Z.lat]);
-    if (!n.length || !this.mapIns)
+    var E, b, C;
+    const t = (C = (b = (E = this.likeRectangleIns) == null ? void 0 : E.getPath) == null ? void 0 : b.call(E)) == null ? void 0 : C.map((I) => [I.lng, I.lat]);
+    if (!t.length || !this.mapIns)
       throw new Error("likeRectangle or map is undefined");
-    const o = n[0], i = this.mapIns.lngLatToContainer(o), r = n[1], s = this.mapIns.lngLatToContainer(r);
-    let l = (i.y - s.y) / (i.x - s.x);
-    l = Math.abs(l) < dt ? 0 : l;
-    const h = i.y - l * i.x, c = this.mapIns.lngLatToContainer(this.center), u = -1 / l, g = c.y - u * c.x, y = !x(l) || E(l) || !x(u) || E(u) || !x(h) || E(h) || !x(g) || E(g);
-    let v;
-    l === 0 ? v = (i.x + s.x) / 2 : y ? v = i.x : v = (g - h) / (l - u);
-    let m;
-    l === 0 ? m = i.y : y ? m = (i.y + s.y) / 2 : m = l * v + h;
-    const T = new AMap.Pixel(v, m);
-    return this.midPoint = this.mapIns.containerToLngLat(T), this.midPoint;
+    const i = t[0], o = this.mapIns.lngLatToContainer(i), s = t[1], a = this.mapIns.lngLatToContainer(s);
+    let h = (o.y - a.y) / (o.x - a.x);
+    h = Math.abs(h) < N ? 0 : h;
+    const c = o.y - h * o.x, l = this.mapIns.lngLatToContainer(this.center), g = -1 / h, d = l.y - g * l.x, f = !M(h) || v(h) || !M(g) || v(g) || !M(c) || v(c) || !M(d) || v(d);
+    let y;
+    h === 0 ? y = (o.x + a.x) / 2 : f ? y = o.x : y = (d - c) / (h - g);
+    let p;
+    h === 0 ? p = o.y : f ? p = (o.y + a.y) / 2 : p = h * y + c;
+    const P = new AMap.Pixel(y, p);
+    return this.midPoint = this.mapIns.containerToLngLat(P), this.midPoint;
   }
   /**
    * 计算第一条连线的中点，位于中心点角度
@@ -2094,98 +1233,98 @@ class Ia extends Rt {
   calcInitAngle() {
     if (!this.mapIns)
       return;
-    const n = this.mapIns.lngLatToContainer(this.midPoint), o = this.mapIns.lngLatToContainer(this.center), i = Math.atan2(n.y - o.y, n.x - o.x);
-    return this.initAngle = 180 / Math.PI * i + 90, this.initAngle;
+    const t = this.mapIns.lngLatToContainer(this.midPoint), i = this.mapIns.lngLatToContainer(this.center), o = Math.atan2(t.y - i.y, t.x - i.x);
+    return this.initAngle = 180 / Math.PI * o + 90, this.initAngle;
   }
   // TODO 需要处理小于中点的情况
   calcInitOffset() {
     if (!this.mapIns)
       return 0;
-    const n = this.mapIns.lngLatToContainer(this.midPoint), o = this.mapIns.lngLatToContainer(this.center);
-    return Ra(n, o);
+    const t = this.mapIns.lngLatToContainer(this.midPoint), i = this.mapIns.lngLatToContainer(this.center);
+    return At(t, i);
   }
   // setRotationPoint() {
   // }
   setRotationLine() {
   }
 }
-class _a extends Rt {
-  constructor(n) {
+class Bt extends $ {
+  constructor(t) {
     super();
-    a(this, "opts");
-    a(this, "map");
-    a(this, "width");
-    a(this, "height");
-    a(this, "center");
-    a(this, "leftTop");
+    r(this, "opts");
+    r(this, "map");
+    r(this, "width");
+    r(this, "height");
+    r(this, "center");
+    r(this, "leftTop");
     // 左上点
-    a(this, "rightTop");
+    r(this, "rightTop");
     // 右上点
-    a(this, "leftBottom");
+    r(this, "leftBottom");
     // 左下点
-    a(this, "rightBottom");
+    r(this, "rightBottom");
     // 右下点
-    a(this, "likeRectangle");
-    a(this, "rotatableIns");
-    a(this, "likeRectangleDestroy");
-    a(this, "likeRectangleRawSetOptions");
-    this.validatorOpts(n), this.bindOptsToSelf(n), n.path || this.setPoints();
-    const o = this.create();
-    return this.registerRotatable(), this.enhanceMethods(), o;
+    r(this, "likeRectangle");
+    r(this, "rotatableIns");
+    r(this, "likeRectangleDestroy");
+    r(this, "likeRectangleRawSetOptions");
+    this.validatorOpts(t), this.bindOptsToSelf(t), t.path || this.setPoints();
+    const i = this.create();
+    return this.registerRotatable(), this.enhanceMethods(), i;
   }
-  validatorOpts(n) {
-    if (!("map" in n) || !n.map)
+  validatorOpts(t) {
+    if (!("map" in t) || !t.map)
       throw new Error("not found map instance");
   }
-  bindOptsToSelf(n) {
-    this.opts = n, Object.entries(n).forEach(([o, i]) => {
-      this[o] = i;
+  bindOptsToSelf(t) {
+    this.opts = t, Object.entries(t).forEach(([i, o]) => {
+      this[i] = o;
     });
   }
   enhanceMethods() {
     this.likeRectangleDestroy = this.likeRectangle.destroy.bind(this.likeRectangle), this.likeRectangle.destroy = this.destroy.bind(this), this.likeRectangleRawSetOptions = this.likeRectangle.setOptions.bind(this.likeRectangle), this.likeRectangle.setOptions = this.likeRectangleSetOptions.bind(this);
   }
-  likeRectangleSetOptions(n) {
-    var i, r;
-    const { rotatable: o } = b(b({}, this.opts), n || {});
-    this.likeRectangleRawSetOptions(n), o ? (this.opts.rotatable = !0, this.registerRotatable()) : (this.opts.rotatable = !1, (r = (i = this.rotatableIns) == null ? void 0 : i.close) == null || r.call(i), this.rotatableIns = null);
+  likeRectangleSetOptions(t) {
+    var o, s;
+    const { rotatable: i } = m(m({}, this.opts), t || {});
+    this.likeRectangleRawSetOptions(t), i ? (this.opts.rotatable = !0, this.registerRotatable()) : (this.opts.rotatable = !1, (s = (o = this.rotatableIns) == null ? void 0 : o.close) == null || s.call(o), this.rotatableIns = null);
   }
   destroy() {
-    var n, o;
-    (o = (n = this.rotatableIns) == null ? void 0 : n.close) == null || o.call(n), this.likeRectangleDestroy();
+    var t, i;
+    (i = (t = this.rotatableIns) == null ? void 0 : t.close) == null || i.call(t), this.likeRectangleDestroy();
   }
   registerRotatable() {
-    const { rotatable: n, rotationOptions: o } = this.opts;
-    if (!n || this.rotatableIns)
+    const { rotatable: t, rotationOptions: i } = this.opts;
+    if (!t || this.rotatableIns)
       return;
-    this.rotatableIns = new Ia(this.likeRectangle, o);
-    const i = this.likeRectangle;
-    this.rotatableIns.on("rotateStart", (r) => i.emit("rotateStart", r)), this.rotatableIns.on("rotate", (r) => i.emit("rotate", r)), this.rotatableIns.on("rotateEnd", (r) => i.emit("rotateEnd", r));
+    this.rotatableIns = new St(this.likeRectangle, i);
+    const o = this.likeRectangle;
+    this.rotatableIns.on("rotateStart", (s) => o.emit("rotateStart", s)), this.rotatableIns.on("rotate", (s) => o.emit("rotate", s)), this.rotatableIns.on("rotateEnd", (s) => o.emit("rotateEnd", s));
   }
-  calcPoints(n) {
-    const [o, i] = n || this.center, r = new AMap.LngLat(o, i), s = Ot(this.width / 2), l = Ot(this.height / 2), h = r.offset(-s, l), c = r.offset(s, l), u = r.offset(-s, -l), g = r.offset(s, -l);
+  calcPoints(t) {
+    const [i, o] = t || this.center, s = new AMap.LngLat(i, o), a = Y(this.width / 2), h = Y(this.height / 2), c = s.offset(-a, h), l = s.offset(a, h), g = s.offset(-a, -h), d = s.offset(a, -h);
     return {
-      leftTop: [h.lng, h.lat],
-      rightTop: [c.lng, c.lat],
-      leftBottom: [u.lng, u.lat],
-      rightBottom: [g.lng, g.lat]
+      leftTop: [c.lng, c.lat],
+      rightTop: [l.lng, l.lat],
+      leftBottom: [g.lng, g.lat],
+      rightBottom: [d.lng, d.lat]
     };
   }
-  setCenter(n) {
-    this.center = n;
+  setCenter(t) {
+    this.center = t;
   }
   setPoints() {
-    const { leftTop: n, rightTop: o, leftBottom: i, rightBottom: r } = this.calcPoints();
-    this.leftTop = n, this.rightTop = o, this.leftBottom = i, this.rightBottom = r;
+    const { leftTop: t, rightTop: i, leftBottom: o, rightBottom: s } = this.calcPoints();
+    this.leftTop = t, this.rightTop = i, this.leftBottom = o, this.rightBottom = s;
   }
   create() {
-    var i, r, s;
-    const n = ((i = this.opts) == null ? void 0 : i.path) || [this.leftTop, this.rightTop, this.rightBottom, this.leftBottom];
-    if (ua(n.join(";").split(";")).length !== 4)
+    var o, s, a;
+    const t = ((o = this.opts) == null ? void 0 : o.path) || [this.leftTop, this.rightTop, this.rightBottom, this.leftBottom];
+    if (ft(t.join(";").split(";")).length !== 4)
       throw new Error("invalid path");
-    if (this.likeRectangle = new AMap.Polygon(), this.likeRectangle.setOptions(b({ path: n }, this.opts)), this.enhanceProperty(), this.registryEvent(), (r = this.opts) != null && r.path) {
-      const [l, h, c, u] = (s = this.opts) == null ? void 0 : s.path;
-      this.updatePoints(l, h, c, u);
+    if (this.likeRectangle = new AMap.Polygon(), this.likeRectangle.setOptions(m({ path: t }, this.opts)), this.enhanceProperty(), this.registryEvent(), (s = this.opts) != null && s.path) {
+      const [h, c, l, g] = (a = this.opts) == null ? void 0 : a.path;
+      this.updatePoints(h, c, l, g);
     }
     return this.likeRectangle;
   }
@@ -2195,30 +1334,30 @@ class _a extends Rt {
   registryEvent() {
     this.likeRectangle && (this.onDragEnd = this.onDragEnd.bind(this), this.likeRectangle.on("dragend", this.onDragEnd));
   }
-  onDragEnd(n) {
-    const i = n.target.getPath(), [r, s, l, h] = i;
-    this.updatePoints(r, s, l, h);
+  onDragEnd(t) {
+    const o = t.target.getPath(), [s, a, h, c] = o;
+    this.updatePoints(s, a, h, c);
   }
-  updatePoints(n, o, i, r) {
-    this.likeRectangle.leftTop = this.leftTop = n, this.likeRectangle.rightTop = this.rightTop = o, this.likeRectangle.rightBottom = this.rightBottom = i, this.likeRectangle.leftBottom = this.leftBottom = r, this.setCenter(this.getCenter());
+  updatePoints(t, i, o, s) {
+    this.likeRectangle.leftTop = this.leftTop = t, this.likeRectangle.rightTop = this.rightTop = i, this.likeRectangle.rightBottom = this.rightBottom = o, this.likeRectangle.leftBottom = this.leftBottom = s, this.setCenter(this.getCenter());
   }
   getCenter() {
-    var o;
-    return (o = this.map.getFitZoomAndCenterByOverlays([this.likeRectangle])) == null ? void 0 : o.pop();
+    var i;
+    return (i = this.map.getFitZoomAndCenterByOverlays([this.likeRectangle])) == null ? void 0 : i.pop();
   }
 }
-class ka {
+class _t {
   // 操作点右边 和 操作点右边 + 1 线段的 k 值
-  constructor(e, n, o) {
-    a(this, "point");
-    a(this, "points");
-    a(this, "center");
-    a(this, "editor");
-    a(this, "isEnabled", !1);
-    a(this, "leftLineK1", null);
+  constructor(e, t, i) {
+    r(this, "point");
+    r(this, "points");
+    r(this, "center");
+    r(this, "editor");
+    r(this, "isEnabled", !1);
+    r(this, "leftLineK1", null);
     // 操作点左边 和 操作点左边 + 1 线段的 k 值
-    a(this, "rightLineK1", null);
-    this.editor = e, this.point = n, this.points = o, this.init(), this.clearClientEvent();
+    r(this, "rightLineK1", null);
+    this.editor = e, this.point = t, this.points = i, this.init(), this.clearClientEvent();
   }
   get len() {
     return this.points.length - 1;
@@ -2239,8 +1378,8 @@ class ka {
     this.isEnabled = !1, this.setCursorPointer("pointer"), this.destroyEvent();
   }
   setCursorPointer(e) {
-    var n;
-    (n = this.point) == null || n.setOptions({ cursor: e });
+    var t;
+    (t = this.point) == null || t.setOptions({ cursor: e });
   }
   init() {
     this.center = this.point.getCenter(), this.onMouseOver = this.onMouseOver.bind(this), this.onMouseOut = this.onMouseOut.bind(this), this.onDragStart = this.onDragStart.bind(this), this.onDragging = this.onDragging.bind(this), this.onDragEnd = this.onDragEnd.bind(this), this.defaultRegistryEvent();
@@ -2250,8 +1389,8 @@ class ka {
   }
   defaultRegistryEvent() {
     const e = this.editor.isMobile;
-    let n = e ? "touchstart" : "mouseover", o = e ? "touchend" : "mouseout";
-    !this.point.hasEvents("mouseover", this.onMouseOver) && this.point.on(n, this.onMouseOver), !this.point.hasEvents("mouseout", this.onMouseOut) && this.point.on(o, this.onMouseOut);
+    let t = e ? "touchstart" : "mouseover", i = e ? "touchend" : "mouseout";
+    !this.point.hasEvents("mouseover", this.onMouseOver) && this.point.on(t, this.onMouseOver), !this.point.hasEvents("mouseout", this.onMouseOut) && this.point.on(i, this.onMouseOut);
   }
   registryEvent() {
     this.point.on("dragstart", this.onDragStart), this.point.on("dragging", this.onDragging), this.point.on("dragend", this.onDragEnd);
@@ -2274,106 +1413,114 @@ class ka {
     this.leftLineK1 = null, this.rightLineK1 = null, this.editor.onDragStart(e);
   }
   onDragging(e) {
-    const { pixel: n } = e;
-    this.updateNextLeftPoint(n, e), this.updateNextRightPoint(n, e), this.editor.onDragging(e);
+    const { pixel: t } = e;
+    this.updateNextLeftPoint(t, e), this.updateNextRightPoint(t, e), this.editor.onDragging(e);
   }
   onDragEnd(e) {
-    const { target: n, pixel: o } = e;
-    this.updateNextLeftPoint(o, e), this.updateNextRightPoint(o, e), this.center = n.getCenter(), this.editor.onDragEnd(e), this.leftLineK1 = null, this.rightLineK1 = null;
+    const { target: t, pixel: i } = e;
+    if (!t) {
+      this.leftLineK1 = null, this.rightLineK1 = null;
+      return;
+    }
+    this.updateNextLeftPoint(i, e), this.updateNextRightPoint(i, e), this.center = t.getCenter(), this.editor.onDragEnd(e), this.leftLineK1 = null, this.rightLineK1 = null;
   }
   /**
    * 更新下一个左节点位置
    * @param operatePointPixel - 操作点坐标
    * @param data
    */
-  updateNextLeftPoint(e, n) {
-    const o = this.idx - 1 >= 0 ? this.idx - 1 : this.len, i = this.points[o], r = this.map.lngLatToContainer(i.getCenter()), s = o - 1 >= 0 ? o - 1 : this.len, l = this.points[s], h = this.map.lngLatToContainer(l.getCenter());
-    let c;
-    this.leftLineK1 == null ? (c = (h.y - r.y) / (h.x - r.x), this.leftLineK1 = c) : c = this.leftLineK1, c = Math.abs(c) < dt ? 0 : c;
-    const u = h.y - c * h.x, g = -1 / c, y = e.y - g * e.x, v = Number.isNaN(c) || !x(c) || E(c) || Number.isNaN(g) || !x(g) || E(g) || Number.isNaN(u) || !x(u) || E(u) || Number.isNaN(y) || !x(y) || E(y);
-    let m, T;
-    c === 0 ? (m = e.x, T = r.y) : v ? (m = r.x, T = e.y) : (m = (y - u) / (c - g), T = c * m + u);
-    const P = new AMap.Pixel(m, T);
-    this.dispatch(i, P, n.originEvent);
+  updateNextLeftPoint(e, t) {
+    if (!e)
+      return;
+    const i = this.idx - 1 >= 0 ? this.idx - 1 : this.len, o = this.points[i], s = this.map.lngLatToContainer(o.getCenter()), a = i - 1 >= 0 ? i - 1 : this.len, h = this.points[a], c = this.map.lngLatToContainer(h.getCenter());
+    let l;
+    this.leftLineK1 == null ? (l = (c.y - s.y) / (c.x - s.x), this.leftLineK1 = l) : l = this.leftLineK1, l = Math.abs(l) < N ? 0 : l;
+    const g = c.y - l * c.x, d = -1 / l, f = e.y - d * e.x, y = Number.isNaN(l) || !M(l) || v(l) || Number.isNaN(d) || !M(d) || v(d) || Number.isNaN(g) || !M(g) || v(g) || Number.isNaN(f) || !M(f) || v(f);
+    let p, P;
+    l === 0 ? (p = e.x, P = s.y) : y ? (p = s.x, P = e.y) : (p = (f - g) / (l - d), P = l * p + g);
+    const E = new AMap.Pixel(p, P);
+    this.dispatch(o, E, t.originEvent);
   }
   /**
    * 更新下一个右节点位置
    * @param operatePointPixel - 操作点坐标
    * @param data
    */
-  updateNextRightPoint(e, n) {
-    const o = this.idx + 1 <= this.len ? this.idx + 1 : 0, i = this.points[o], r = this.map.lngLatToContainer(i.getCenter()), s = o + 1 <= this.len ? o + 1 : 0, l = this.points[s], h = this.map.lngLatToContainer(l.getCenter());
-    let c;
-    this.rightLineK1 == null ? (c = (h.y - r.y) / (h.x - r.x), this.rightLineK1 = c) : c = this.rightLineK1, c = Math.abs(c) < dt ? 0 : c;
-    const u = h.y - c * h.x, g = -1 / c, y = e.y - g * e.x, v = Number.isNaN(c) || !x(c) || E(c) || Number.isNaN(g) || !x(g) || E(g) || Number.isNaN(u) || !x(u) || E(u) || Number.isNaN(y) || !x(y) || E(y);
-    let m, T;
-    c === 0 ? (m = e.x, T = r.y) : v ? (m = r.x, T = e.y) : (m = (y - u) / (c - g), T = c * m + u);
-    const P = new AMap.Pixel(m, T);
-    this.dispatch(i, P, n.originEvent);
+  updateNextRightPoint(e, t) {
+    if (!e)
+      return;
+    const i = this.idx + 1 <= this.len ? this.idx + 1 : 0, o = this.points[i], s = this.map.lngLatToContainer(o.getCenter()), a = i + 1 <= this.len ? i + 1 : 0, h = this.points[a], c = this.map.lngLatToContainer(h.getCenter());
+    let l;
+    this.rightLineK1 == null ? (l = (c.y - s.y) / (c.x - s.x), this.rightLineK1 = l) : l = this.rightLineK1, l = Math.abs(l) < N ? 0 : l;
+    const g = c.y - l * c.x, d = -1 / l, f = e.y - d * e.x, y = Number.isNaN(l) || !M(l) || v(l) || Number.isNaN(d) || !M(d) || v(d) || Number.isNaN(g) || !M(g) || v(g) || Number.isNaN(f) || !M(f) || v(f);
+    let p, P;
+    l === 0 ? (p = e.x, P = s.y) : y ? (p = s.x, P = e.y) : (p = (f - g) / (l - d), P = l * p + g);
+    const E = new AMap.Pixel(p, P);
+    this.dispatch(o, E, t.originEvent);
   }
-  dispatch(e, n, o) {
-    const r = {
-      lnglat: this.map.containerToLngLat(n),
-      originEvent: o
+  dispatch(e, t, i) {
+    const s = {
+      lnglat: this.map.containerToLngLat(t),
+      originEvent: i
       // 这里的鼠标事件直接透传即可
     };
-    e.emit("dragend", r);
+    e.emit("dragend", s);
   }
 }
-const $a = {
+const Nt = {
   rotatingCloseEditor: !0,
   editingCloseRotator: !0,
   isMobile: !1
 };
-class Oa {
-  constructor(e, n, o) {
-    a(this, "opts");
-    a(this, "map");
-    a(this, "likeRectangle");
-    a(this, "polygonEditor");
-    a(this, "polygonEditorOpen");
-    a(this, "polygonEditorClose");
-    a(this, "controlPoints");
-    a(this, "inEditing", !1);
-    a(this, "isRestart", !1);
-    a(this, "onDragStart", (e) => {
-      var n, o;
-      (o = (n = this.rotatableIns) == null ? void 0 : n.close) == null || o.call(n), this.onChange("dragstart", e);
+class $t {
+  constructor(e, t, i) {
+    r(this, "opts");
+    r(this, "map");
+    r(this, "likeRectangle");
+    r(this, "polygonEditor");
+    r(this, "polygonEditorOpen");
+    r(this, "polygonEditorClose");
+    r(this, "controlPoints");
+    r(this, "inEditing", !1);
+    r(this, "isRestart", !1);
+    r(this, "onDragStart", (e) => {
+      var t, i;
+      (i = (t = this.rotatableIns) == null ? void 0 : t.close) == null || i.call(t), this.onChange("dragstart", e);
     });
-    a(this, "onDragging", (e) => {
+    r(this, "onDragging", (e) => {
       this.updateLikeRectanglePath(), this.onChange("dragging", e);
     });
-    a(this, "onDragEnd", (e) => {
-      var n, o;
-      (o = (n = this.rotatableIns) == null ? void 0 : n.open) == null || o.call(n), this.onChange("dragend", e);
+    r(this, "onDragEnd", (e) => {
+      var t, i;
+      (i = (t = this.rotatableIns) == null ? void 0 : t.open) == null || i.call(t), this.onChange("dragend", e);
     });
-    a(this, "onChange", (e, n) => {
-      var o, i;
-      (i = (o = this.opts) == null ? void 0 : o.onChange) == null || i.call(o, e, n);
+    r(this, "onChange", (e, t) => {
+      var i, o;
+      (o = (i = this.opts) == null ? void 0 : i.onChange) == null || o.call(i, e, t);
     });
-    a(this, "onRotateStart", () => _(this, null, function* () {
+    r(this, "onRotateStart", () => x(this, null, function* () {
       this.inEditing && this.polygonEditorClose();
     }));
-    a(this, "onRotateEnd", () => _(this, null, function* () {
+    r(this, "onRotateEnd", () => x(this, null, function* () {
       this.inEditing && this.open();
     }));
-    return this.map = e, this.likeRectangle = n, this.opts = b(b({}, $a), o || {}), this.onChange = this.onChange.bind(this), this.createEditor();
+    return this.map = e, this.likeRectangle = t, this.opts = m(m({}, Nt), i || {}), this.onChange = this.onChange.bind(this), this.createEditor();
   }
   get options() {
-    return st(b({}, this.opts), {
+    return A(m({}, this.opts), {
       midControlPoint: { radius: 0 }
     });
   }
   get rotatable() {
-    var e, n, o;
-    return (o = (n = (e = this.likeRectangle) == null ? void 0 : e.likeRectangle) == null ? void 0 : n.opts) == null ? void 0 : o.rotatable;
+    var e, t, i;
+    return (i = (t = (e = this.likeRectangle) == null ? void 0 : e.likeRectangle) == null ? void 0 : t.opts) == null ? void 0 : i.rotatable;
   }
   get rotatingCloseEditor() {
     return this.opts.rotatingCloseEditor;
   }
   get rotatableIns() {
-    var e, n;
-    return (n = (e = this.likeRectangle) == null ? void 0 : e.likeRectangle) == null ? void 0 : n.rotatableIns;
+    var e, t;
+    return (t = (e = this.likeRectangle) == null ? void 0 : e.likeRectangle) == null ? void 0 : t.rotatableIns;
   }
   get isMobile() {
     return this.opts.isMobile;
@@ -2388,9 +1535,9 @@ class Oa {
     this.inEditing = !1, this.destroyLikeRectangleRotateEvents(), this.polygonEditorClose();
   }
   findControlPoint(e) {
-    return this.controlPoints.find((n) => {
-      const o = n.point.getCenter(), i = `${o.lng}_${o.lat}`, r = e.getCenter(), s = `${r.lng}_${r.lat}`;
-      return i === s;
+    return this.controlPoints.find((t) => {
+      const i = t.point.getCenter(), o = `${i.lng}_${i.lat}`, s = e.getCenter(), a = `${s.lng}_${s.lat}`;
+      return o === a;
     });
   }
   createEditor() {
@@ -2407,45 +1554,45 @@ class Oa {
     this.rotatable && this.rotatingCloseEditor && (this.likeRectangle.off("rotateStart", this.onRotateStart), this.likeRectangle.off("rotateEnd", this.onRotateEnd));
   }
   registryControlPoints() {
-    var n, o, i, r;
-    (this.controlPoints || []).forEach((s) => {
-      s.destroyEvent();
+    var t, i, o, s;
+    (this.controlPoints || []).forEach((a) => {
+      a.destroyEvent();
     });
-    const e = (r = (i = (o = (n = this.polygonEditor) == null ? void 0 : n.singleRingListHandle) == null ? void 0 : o.list) == null ? void 0 : i.editingVertexMarkerList) != null ? r : [];
-    this.controlPoints = e.map((s, l) => {
-      const h = s.getExtData() || {};
-      return s.setExtData(st(b({}, h), { idx: l })), new ka(this, s, e);
+    const e = (s = (o = (i = (t = this.polygonEditor) == null ? void 0 : t.singleRingListHandle) == null ? void 0 : i.list) == null ? void 0 : o.editingVertexMarkerList) != null ? s : [];
+    this.controlPoints = e.map((a, h) => {
+      const c = a.getExtData() || {};
+      return a.setExtData(A(m({}, c), { idx: h })), new _t(this, a, e);
     });
   }
   updateLikeRectanglePath() {
     const [
       e,
-      n,
-      o,
-      i
-    ] = this.controlPoints, r = e.point.getCenter(), s = n.point.getCenter(), l = o.point.getCenter(), h = i.point.getCenter();
+      t,
+      i,
+      o
+    ] = this.controlPoints, s = e.point.getCenter(), a = t.point.getCenter(), h = i.point.getCenter(), c = o.point.getCenter();
     this.likeRectangle.likeRectangle.updatePoints(
-      [r.lng, r.lat],
       [s.lng, s.lat],
-      [l.lng, l.lat],
-      [h.lng, h.lat]
+      [a.lng, a.lat],
+      [h.lng, h.lat],
+      [c.lng, c.lat]
     );
   }
 }
-const Da = {
-  PolygonRangingInDrawing: sn,
-  PolygonEditorRanging: ga,
-  PolygonEditorEvent: fa,
-  PolygonRanging: pa,
-  LikeRectangle: _a,
-  LikeRectangleEditor: Oa
+const Ft = {
+  PolygonRangingInDrawing: pt,
+  PolygonEditorRanging: yt,
+  PolygonEditorEvent: vt,
+  PolygonRanging: Pt,
+  LikeRectangle: Bt,
+  LikeRectangleEditor: $t
 };
 export {
-  _a as LikeRectangle,
-  Oa as LikeRectangleEditor,
-  fa as PolygonEditorEvent,
-  ga as PolygonEditorRanging,
-  pa as PolygonRanging,
-  sn as PolygonRangingInDrawing,
-  Da as default
+  Bt as LikeRectangle,
+  $t as LikeRectangleEditor,
+  vt as PolygonEditorEvent,
+  yt as PolygonEditorRanging,
+  Pt as PolygonRanging,
+  pt as PolygonRangingInDrawing,
+  Ft as default
 };

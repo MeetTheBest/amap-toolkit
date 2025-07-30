@@ -1,4 +1,4 @@
-import { isFinite } from 'lodash-es';
+import { isFinite } from '../utils/lodash';
 import LikeRectangleEditor from ".";
 import { isLimitMaxInteger } from '../utils/index';
 import { K_DOWN_LIMIT_COUNT } from '../constants/common';
@@ -145,6 +145,12 @@ class ControlPoint {
     onDragEnd(data: IObject) {
         const { target, pixel } = data;
 
+        if (!target) {
+            this.leftLineK1 = null;
+            this.rightLineK1 = null;
+            return;
+        }
+
         // 更新下一个左节点的位置
         this.updateNextLeftPoint(pixel, data);
 
@@ -168,6 +174,8 @@ class ControlPoint {
      * @param data
      */
     updateNextLeftPoint(operatePointPixel: AMap.Pixel, data: IObject) {
+        if (!operatePointPixel) return;
+
         // 左节点的 xy 坐标
         const leftIdx = this.idx - 1 >= 0 ? this.idx - 1 : this.len;
         const leftPoint = this.points[leftIdx];
@@ -176,7 +184,7 @@ class ControlPoint {
         // console.log('leftPointPixel ===>', { x: leftPointPixel.x, y: leftPointPixel.y });
         // this.map.add(new AMap.Marker({ position: leftPoint.getCenter(), content: 'l' }));
 
-        // 下一个左节点的下一个左节点的 xy 坐标（对角点点位）
+        // 下一个左节点的下一个左节点的 xy 坐标（操作点的对角点点位）
         const leftNextIdx = leftIdx - 1 >= 0 ? leftIdx - 1 : this.len;
         const leftNextPoint = this.points[leftNextIdx];
         const leftNextPointPixel = this.map.lngLatToContainer(leftNextPoint.getCenter());
@@ -265,6 +273,7 @@ class ControlPoint {
      * @param data
      */
     updateNextRightPoint(operatePointPixel: AMap.Pixel, data: IObject) {
+        if (!operatePointPixel) return;
 
         // 下一个节点的 xy 坐标
         const rightIdx = this.idx + 1 <= this.len ? this.idx + 1 : 0;
@@ -343,8 +352,8 @@ class ControlPoint {
             x = (b2 - b1) / (k1 - k2);
             y = k1 * x + b1;
         }
-        // console.log('updateNextRightPoint.x ===>', x);
-        // console.log('updateNextRightPoint.y ===>', y);
+        console.log('updateNextRightPoint.x ===>', x);
+        console.log('updateNextRightPoint.y ===>', y);
 
         const nextRightPointPixel = new AMap.Pixel(x, y);
         // const nextRightPoint = this.map.containerToLngLat(nextRightPointPixel);

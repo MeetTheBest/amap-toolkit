@@ -1,4 +1,4 @@
-import { get } from 'lodash-es';
+import { get } from '../utils/lodash';
 
 import CircleMarkerCollection from './circleMarkerCollection';
 import LineCollection from './lineCollection';

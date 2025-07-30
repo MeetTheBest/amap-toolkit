@@ -1,4 +1,4 @@
-import { isFinite } from 'lodash-es'
+import { isFinite } from '../utils/lodash';
 import ElementRotator from 'element-rotator';
 
 import LikeRectangle from '../LikeRectangle';
@@ -75,9 +75,11 @@ class Rotatable extends Event {
     }
 
     close() {
-        this.reset();
-        this.destroyLikeRectangleEvents();
+        // 先移除事件
         this.destroyEvent();
+        this.destroyLikeRectangleEvents();
+        // 在重置数据
+        this.reset();
     }
 
     registryLikeRectangleEvents() {
@@ -343,7 +345,8 @@ class Rotatable extends Event {
     }
 
     updateRotationAbleOffset = () => {
-        const ableDOM = this.elementRotatorIns.target;
+        const ableDOM = this.elementRotatorIns?.target;
+        if (!ableDOM) return;
         ableDOM.style.top = `-${this.calcInitOffset()}`;
     }
 

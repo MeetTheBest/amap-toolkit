@@ -1,4 +1,4 @@
-import { omit } from 'lodash-es'
+import { omit } from '../utils/lodash'
 
 const STYLE = {
     radius: 6,
